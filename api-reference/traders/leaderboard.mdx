@@ -6,7 +6,7 @@ description: "Retrieve trader leaderboard data"
 
 ## Query Parameters
 
-<ParamField query="protocol" type="string" default="GMX" required>
+<ParamField query="protocol" type="string" required>
   The protocol to get leaderboard for. Supported values include: `GMX`,
   `KWENTA`, `POLYNOMIAL`, `POLYNOMIAL_L2`, `GMX_V2_AVAX`, `GMX_V2`, `GNS`,
   `GNS_POLY`, `GNS_BASE`, `GNS_APE`, `LEVEL_BNB`, `LEVEL_ARB`, `MUX_ARB`,
@@ -20,20 +20,20 @@ description: "Retrieve trader leaderboard data"
   `APOLLOX_BASE`, `GMX_AVAX`, `SYNTHETIX`, `DEPERP_BASE`, `ELFI_ARB`
 </ParamField>
 
-<ParamField query="queryDate" type="number" default="1701835880676" required>
+<ParamField query="queryDate" type="number" required>
   Date in timestamp format
 </ParamField>
 
-<ParamField query="statisticType" type="string" default="MONTH" required>
+<ParamField query="statisticType" type="string" required>
   Type of statistics. Values: `MONTH`, `WEEK`
 </ParamField>
 
-<ParamField query="limit" type="number">
-  Number of records to return (default: 20)
+<ParamField query="limit" type="number" default="20">
+  Number of records to return
 </ParamField>
 
-<ParamField query="offset" type="number">
-  Number of records to skip (default: 0)
+<ParamField query="offset" type="number" default="0">
+  Number of records to skip
 </ParamField>
 
 <ParamField query="sort_by" type="string">

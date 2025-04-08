@@ -1,0 +1,244 @@
+---
+title: "Position List"
+api: "POST https://api.copin.io/{protocol}/position/filter"
+description: "Retrieve positions for a specific protocol"
+---
+
+## Path Parameters
+
+<ParamField path="protocol" type="string" required>
+  The protocol to get positions for. Supported values include: `GMX`, `KWENTA`,
+  `POLYNOMIAL`, `POLYNOMIAL_L2`, `GMX_V2_AVAX`, `GMX_V2`, `GNS`, `GNS_POLY`,
+  `GNS_BASE`, `GNS_APE`, `LEVEL_BNB`, `LEVEL_ARB`, `MUX_ARB`, `APOLLOX_BNB`,
+  `AVANTIS_BASE`, `EQUATION_ARB`, `LOGX_BLAST`, `LOGX_MODE`, `MYX_ARB`,
+  `DEXTORO`, `VELA_ARB`, `HMX_ARB`, `SYNTHETIX_V3`, `SYNTHETIX_V3_ARB`,
+  `KTX_MANTLE`, `CYBERDEX`, `YFX_ARB`, `KILOEX_OPBNB`, `KILOEX_BNB`,
+  `KILOEX_MANTA`, `KILOEX_BASE`, `ROLLIE_SCROLL`, `MUMMY_FANTOM`, `HYPERLIQUID`,
+  `SYNFUTURE_BASE`, `MORPHEX_FANTOM`, `PERENNIAL_ARB`, `BSX_BASE`, `DYDX`,
+  `UNIDEX_ARB`, `VERTEX_ARB`, `HORIZON_BNB`, `HOLDSTATION_ZKSYNC`, `ZENO_METIS`,
+  `LINEHUB_LINEA`, `BMX_BASE`, `FOXIFY_ARB`, `APOLLOX_BASE`, `GMX_AVAX`,
+  `SYNTHETIX`, `DEPERP_BASE`, `ELFI_ARB`
+</ParamField>
+
+## Request Body
+
+<ParamField body="pagination" type="object">
+  Pagination parameters
+  <Expandable title="properties">
+    <ParamField body="limit" type="number" default="20">
+      Number of records to return
+    </ParamField>
+    <ParamField body="offset" type="number" default="0">
+      Number of records to skip
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="sortBy" type="string">
+  Field to sort by. Values: `closeBlockTime`, `openBlockTime`, `averagePrice`,
+  `size`, `leverage`, `durationInSecond`, `orderCount`, `roi`, `realisedRoi`,
+  `pnl`, `realisedPnl`
+</ParamField>
+
+<ParamField body="sortType" type="string" default="desc">
+  Sort direction. Values: `desc`, `asc`
+</ParamField>
+
+<ParamField body="queries" type="array">
+  Array of query objects
+  <Expandable title="properties">
+    <ParamField body="fieldName" type="string">
+      Field name to query. Values: `account`, `status`, `pair`
+    </ParamField>
+    <ParamField body="value" type="string">
+      Value for the field. For status: `CLOSE`, `OPEN`. For account: address
+      string. For pair: `ETH-USDT`, `BTC-USDT`,...
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+## Request Example
+
+```json
+{
+  "pagination": {
+    "limit": 20,
+    "offset": 0
+  },
+  "queries": [
+    {
+      "fieldName": "status",
+      "value": "CLOSE"
+    },
+    {
+      "fieldName": "account",
+      "value": "0x9f431A46149bab70373B9C6867d2dB8C2F45aa11"
+    }
+  ],
+  "sortBy": "closeBlockTime",
+  "sortType": "desc"
+}
+```
+
+## Response
+
+<ResponseField name="data" type="array">
+  Array of trader positions
+  <Expandable title="properties">
+    <ResponseField name="id" type="string">
+      Unique identifier for the position
+    </ResponseField>
+    <ResponseField name="account" type="string">
+      Trader's account address
+    </ResponseField>
+    <ResponseField name="key" type="string">
+      Unique key for the position
+    </ResponseField>
+    <ResponseField name="logId" type="number">
+      Log ID
+    </ResponseField>
+    <ResponseField name="openBlockNumber" type="number">
+      Block number when position was opened
+    </ResponseField>
+    <ResponseField name="openBlockTime" type="string">
+      Timestamp when position was opened
+    </ResponseField>
+    <ResponseField name="closeBlockNumber" type="number">
+      Block number when position was closed
+    </ResponseField>
+    <ResponseField name="closeBlockTime" type="string">
+      Timestamp when position was closed
+    </ResponseField>
+    <ResponseField name="indexToken" type="string">
+      Token address
+    </ResponseField>
+    <ResponseField name="pair" type="string">
+      Trading pair
+    </ResponseField>
+    <ResponseField name="size" type="number">
+      Position size
+    </ResponseField>
+    <ResponseField name="fee" type="number">
+      Fee paid
+    </ResponseField>
+    <ResponseField name="collateral" type="number">
+      Collateral amount
+    </ResponseField>
+    <ResponseField name="averagePrice" type="number">
+      Average entry price
+    </ResponseField>
+    <ResponseField name="funding" type="number">
+      Funding amount
+    </ResponseField>
+    <ResponseField name="pnl" type="number">
+      Profit and loss including fee
+    </ResponseField>
+    <ResponseField name="realisedPnl" type="number">
+      Profit and loss without fee
+    </ResponseField>
+    <ResponseField name="roi" type="number">
+      Return on investment including fee
+    </ResponseField>
+    <ResponseField name="realisedRoi" type="number">
+      Return on investment without fee
+    </ResponseField>
+    <ResponseField name="isLong" type="boolean">
+      Whether position is long
+    </ResponseField>
+    <ResponseField name="isWin" type="boolean">
+      Whether position is winning
+    </ResponseField>
+    <ResponseField name="isLiquidate" type="boolean">
+      Whether position was liquidated
+    </ResponseField>
+    <ResponseField name="leverage" type="number">
+      Leverage used
+    </ResponseField>
+    <ResponseField name="orderCount" type="number">
+      Number of orders
+    </ResponseField>
+    <ResponseField name="orderIncreaseCount" type="number">
+      Number of increase orders
+    </ResponseField>
+    <ResponseField name="orderDecreaseCount" type="number">
+      Number of decrease orders
+    </ResponseField>
+    <ResponseField name="durationInSecond" type="number">
+      Duration in seconds
+    </ResponseField>
+    <ResponseField name="status" type="string">
+      Position status (OPEN, CLOSE)
+    </ResponseField>
+    <ResponseField name="createdAt" type="string">
+      Timestamp when record was created
+    </ResponseField>
+    <ResponseField name="protocol" type="string">
+      Protocol name
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="meta" type="object">
+  Metadata about the response
+  <Expandable title="properties">
+    <ResponseField name="limit" type="number">
+      Number of records returned
+    </ResponseField>
+    <ResponseField name="offset" type="number">
+      Number of records skipped
+    </ResponseField>
+    <ResponseField name="total" type="number">
+      Total number of records matching the query
+    </ResponseField>
+    <ResponseField name="totalPages" type="number">
+      Total number of pages
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Response Example
+
+```json
+{
+  "data": [
+    {
+      "id": "656bd0e0d8fb813a7046c86a",
+      "account": "0x852610C4BD327C9c7fd93e06505173092f29a39c",
+      "key": "0x375fa2B494208b0F4f3f5f0b85121844a929AE6C-0x2B3bb4c683BFc5239B029131EEf3B1d214478d93-LONG",
+      "logId": 16,
+      "openBlockNumber": 112982925,
+      "openBlockTime": "2023-12-03T00:50:27.000Z",
+      "closeBlockNumber": 113022125,
+      "closeBlockTime": "2023-12-03T22:37:07.000Z",
+      "indexToken": "0x2B3bb4c683BFc5239B029131EEf3B1d214478d93",
+      "pair": "ETH-USDT",
+      "size": 150057.1415073778,
+      "fee": 126.470238805,
+      "collateral": 9907.023471108,
+      "averagePrice": 2165.370462136,
+      "funding": -158.90564217635142,
+      "pnl": 5958.737081751136,
+      "realisedPnl": 6244.112962732488,
+      "roi": 60.14659296133386,
+      "realisedRoi": 63.02713404225081,
+      "isLong": true,
+      "isWin": true,
+      "isLiquidate": false,
+      "leverage": 15.146541435476728,
+      "orderCount": 2,
+      "orderIncreaseCount": 1,
+      "orderDecreaseCount": 1,
+      "durationInSecond": 78400,
+      "status": "CLOSE",
+      "createdAt": "2023-12-03T00:50:40.058Z",
+      "protocol": "KWENTA"
+    }
+  ],
+  "meta": {
+    "limit": 20,
+    "offset": 0,
+    "total": 56,
+    "totalPages": 3
+  }
+}
+```
