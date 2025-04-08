@@ -12,8 +12,8 @@
   },
   "topbarLinks": [
     {
-      "name": "Support",
-      "url": "mailto:support@example.com"
+      "name": "Docs",
+      "url": "https://docs.copin.io"
     }
   ],
   "topbarCtaButton": {
