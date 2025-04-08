@@ -1,0 +1,41 @@
+{
+  "name": "Copin API",
+  "logo": {
+    "light": "/logo/copin.svg",
+    "dark": "/logo/copin.svg"
+  },
+  "favicon": "/logo/copin.svg",
+  "colors": {
+    "primary": "#4EAEFD",
+    "light": "#97CFFD",
+    "dark": "#2F9EEE"
+  },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "mailto:support@example.com"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "App",
+    "url": "https://app.copin.io"
+  },
+  "anchors": [],
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": ["api-reference/introduction"]
+    },
+    {
+      "group": "Traders",
+      "pages": [
+        "api-reference/traders/statistics",
+        "api-reference/traders/leaderboard"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/copin-protocol",
+    "twitter": "https://x.com/intent/follow?region=follow_link&screen_name=copin_io"
+  }
+}

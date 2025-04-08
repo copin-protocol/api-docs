@@ -1,0 +1,144 @@
+---
+title: "Introduction"
+description: "Welcome to the Copin API documentation"
+---
+
+## Overview
+
+This guide will help you understand how to use our API to access trader data, statistics, positions, and more across multiple protocols.
+
+## Authentication
+
+All API requests require authentication using an API key. Include your API key in the header of each request:
+
+```bash
+X-COPIN_API_KEY: YOUR_COPIN_API_KEY
+```
+
+Replace `YOUR_COPIN_API_KEY` with the actual API key you received from us.
+
+## Base URL
+
+All API requests should be made to:
+
+```
+https://api.copin.io
+```
+
+## Rate Limiting
+
+Our API implements rate limiting to protect against abuse. By default, you can make up to 30 requests per minute.
+
+## Supported Protocols
+
+The Copin API supports multiple protocols including:
+
+- GMX
+- KWENTA
+- POLYNOMIAL
+- POLYNOMIAL_L2
+- GMX_V2_AVAX
+- GMX_V2
+- GNS
+- GNS_POLY
+- GNS_BASE
+- GNS_APE
+- LEVEL_BNB
+- LEVEL_ARB
+- MUX_ARB
+- APOLLOX_BNB
+- AVANTIS_BASE
+- EQUATION_ARB
+- LOGX_BLAST
+- LOGX_MODE
+- MYX_ARB
+- DEXTORO
+- VELA_ARB
+- HMX_ARB
+- SYNTHETIX_V3
+- SYNTHETIX_V3_ARB
+- KTX_MANTLE
+- CYBERDEX
+- YFX_ARB
+- KILOEX_OPBNB
+- KILOEX_BNB
+- KILOEX_MANTA
+- KILOEX_BASE
+- ROLLIE_SCROLL
+- MUMMY_FANTOM
+- HYPERLIQUID
+- SYNFUTURE_BASE
+- MORPHEX_FANTOM
+- PERENNIAL_ARB
+- BSX_BASE
+- DYDX
+- UNIDEX_ARB
+- VERTEX_ARB
+- HORIZON_BNB
+- HOLDSTATION_ZKSYNC
+- ZENO_METIS
+- LINEHUB_LINEA
+- BMX_BASE
+- FOXIFY_ARB
+- APOLLOX_BASE
+- GMX_AVAX
+- SYNTHETIX
+- DEPERP_BASE
+- ELFI_ARB
+
+## Example Integration
+
+```javascript
+// Sample integration for Copin API
+async function getGMXLeaderboardData() {
+  // API endpoint to fetch the leaderboard data
+  const url = "https://api.copin.io/leaderboards/page";
+
+  // Copin-provided API key (replace with your actual key)
+  const apiKey = "YOUR_COPIN_API_KEY";
+
+  // Request headers with authentication
+  const headers = {
+    "X-COPIN_API_KEY": apiKey,
+    Accept: "application/json",
+  };
+
+  // Query parameters (customizable based on your needs)
+  const params = new URLSearchParams({
+    protocol: "GMX", // GMX v1 on Arbitrum
+    queryDate: "1741408905620", // March 2025
+    statisticType: "MONTH", // Monthly leaderboard
+    offset: "0", // Starting record
+    limit: "10", // Number of results
+    sort_by: "ranking",
+    sort_type: "asc", // Sort ranking increase
+  });
+  try {
+    // Make the API request
+    const response = await fetch(`${url}?${params}`, {
+      method: "GET",
+      headers: headers,
+    });
+    // Check if the response is successful
+    if (!response.ok) {
+      throw new Error(
+        `HTTP Error: ${response.status} - ${response.statusText}`
+      );
+    }
+    // Parse the JSON response
+    const data = await response.json();
+
+    // Log or process the data
+    console.log("Copin Leaderboard Data:", data);
+    return data;
+  } catch (error) {
+    // Handle errors (e.g., network issues, rate limits, invalid key)
+    console.error("Error fetching leaderboard data:", error.message);
+    if (error.message.includes("429")) {
+      console.error("Rate limit exceeded. Check your quota.");
+    }
+  }
+}
+// Execute the function
+getGMXLeaderboardData();
+```

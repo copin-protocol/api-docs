@@ -1,0 +1,331 @@
+---
+title: "Trader Statistics"
+api: "POST https://api.copin.io/public/{protocol}/position/statistic/filter"
+description: "Retrieve statistics for traders"
+---
+
+# Get Trader Statistics
+
+This endpoint allows you to retrieve detailed statistics for traders on a specific protocol.
+
+## Path Parameters
+
+<ParamField path="protocol" type="string" required>
+  The protocol to get statistics for. Supported values include: `GMX`, `KWENTA`,
+  `POLYNOMIAL`, `POLYNOMIAL_L2`, `GMX_V2_AVAX`, `GMX_V2`, `GNS`, `GNS_POLY`,
+  `GNS_BASE`, `GNS_APE`, `LEVEL_BNB`, `LEVEL_ARB`, `MUX_ARB`, `APOLLOX_BNB`,
+  `AVANTIS_BASE`, `EQUATION_ARB`, `LOGX_BLAST`, `LOGX_MODE`, `MYX_ARB`,
+  `DEXTORO`, `VELA_ARB`, `HMX_ARB`, `SYNTHETIX_V3`, `SYNTHETIX_V3_ARB`,
+  `KTX_MANTLE`, `CYBERDEX`, `YFX_ARB`, `KILOEX_OPBNB`, `KILOEX_BNB`,
+  `KILOEX_MANTA`, `KILOEX_BASE`, `ROLLIE_SCROLL`, `MUMMY_FANTOM`, `HYPERLIQUID`,
+  `SYNFUTURE_BASE`, `MORPHEX_FANTOM`, `PERENNIAL_ARB`, `BSX_BASE`, `DYDX`,
+  `UNIDEX_ARB`, `VERTEX_ARB`, `HORIZON_BNB`, `HOLDSTATION_ZKSYNC`, `ZENO_METIS`,
+  `LINEHUB_LINEA`, `BMX_BASE`, `FOXIFY_ARB`, `APOLLOX_BASE`, `GMX_AVAX`,
+  `SYNTHETIX`, `DEPERP_BASE`, `ELFI_ARB`
+</ParamField>
+
+## Request Body
+
+<ParamField body="pagination" type="object">
+  Pagination parameters
+  <Expandable title="properties">
+    <ParamField body="limit" type="number">
+      Number of records to return
+    </ParamField>
+    <ParamField body="offset" type="number">
+      Number of records to skip
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="sortBy" type="string">
+  Field to sort by. Can be any of the fieldName values in ranges.
+</ParamField>
+
+<ParamField body="sortType" type="string">
+  Sort direction. Values: `desc`, `asc`
+</ParamField>
+
+<ParamField body="queries" type="array">
+  Array of query objects
+  <Expandable title="properties">
+    <ParamField body="fieldName" type="string">
+      Field name to query. Values: `type`, `account`
+    </ParamField>
+    <ParamField body="value" type="string">
+      Value for the field. For type: `D7`, `D15`, `D30`, `D60`. For account: EVM
+      address
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="ranges" type="array">
+  Array of range objects
+  <Expandable title="properties">
+    <ParamField body="fieldName" type="string">
+      Field name to filter. Supported values: - `lastTradeAtTs`: Timestamp of
+      last trade - `runTimeDays`: Number of days since the first trade - `pnl`:
+      PnL including fee - `realisedPnl`: PnL without fee - `avgRoi`: Average ROI
+      including fee - `realisedAvgRoi`: Average ROI without fee - `totalGain`:
+      Total gain including fee - `realisedTotalGain`: Total gain without fee -
+      `totalLoss`: Total loss including fee - `realisedTotalLoss`: Total loss
+      without fee - `totalFee`: Total fee - `totalVolume`: Total volume -
+      `avgVolume`: Average volume - `maxRoi`: Maximum ROI including fee -
+      `realisedMaxRoi`: Maximum ROI without fee - `maxDrawdown`: Max drawdown
+      including fee - `realisedMaxDrawdown`: Max drawdown without fee -
+      `totalTrade`: Total trades - `totalWin`: Total wins - `totalLose`: Total
+      loses - `totalLiquidation`: Total liquidations - `winRate`: Win Rate
+      (percent) - `profitRate`: Total gain / (Total gain + Total loss) (percent,
+      including fee) - `realisedProfitRate`: Total gain / (Total gain + Total
+      loss) (percent, without fee) - `longRate`: Long Positions / Total
+      Positions (percent) - `orderPositionRatio`: Total Orders / Total Positions
+      - `profitLossRatio`: (Total gain / Total win) / (Total loss / Total lose)
+      (including fee) - `realisedProfitLossRatio`: (Total gain / Total win) /
+      (Total loss / Total lose) (without fee) - `gainLossRatio`: Total gain /
+      Total loss (including fee) - `realisedGainLossRatio`: Total gain / Total
+      loss (without fee) - `avgLeverage`: Average leverage - `maxLeverage`:
+      Maximum leverage - `minLeverage`: Minimum leverage - `avgDuration`:
+      Average duration in seconds - `minDuration`: Minimum duration in seconds -
+      `maxDuration`: Maximum duration in seconds
+    </ParamField>
+    <ParamField body="gte" type="number">
+      Greater than or equal to value
+    </ParamField>
+    <ParamField body="lte" type="number">
+      Less than or equal to value
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+## Request Example
+
+```json
+{
+  "pagination": {
+    "limit": 20,
+    "offset": 0
+  },
+  "queries": [
+    {
+      "fieldName": "type",
+      "value": "D30"
+    }
+  ],
+  "ranges": [
+    {
+      "fieldName": "realisedPnl",
+      "gte": 1000
+    },
+    {
+      "fieldName": "lastTradeAtTs",
+      "gte": 1696240506809
+    },
+    {
+      "fieldName": "totalWin",
+      "gte": 5
+    },
+    {
+      "fieldName": "realisedAvgRoi",
+      "gte": 20
+    },
+    {
+      "fieldName": "winRate",
+      "gte": 80
+    },
+    {
+      "fieldName": "realisedMaxDrawdown",
+      "gte": -30
+    }
+  ],
+  "sortBy": "realisedPnl",
+  "sortType": "desc"
+}
+```
+
+## Response
+
+<ResponseField name="data" type="array">
+  Array of trader statistics
+  <Expandable title="properties">
+    <ResponseField name="id" type="string">
+      Unique identifier for the trader
+    </ResponseField>
+    <ResponseField name="account" type="string">
+      Trader's account address
+    </ResponseField>
+    <ResponseField name="totalTrade" type="number">
+      Total number of trades
+    </ResponseField>
+    <ResponseField name="totalWin" type="number">
+      Total number of winning trades
+    </ResponseField>
+    <ResponseField name="totalLose" type="number">
+      Total number of losing trades
+    </ResponseField>
+    <ResponseField name="totalGain" type="number">
+      Total gain including fee
+    </ResponseField>
+    <ResponseField name="realisedTotalGain" type="number">
+      Total gain without fee
+    </ResponseField>
+    <ResponseField name="totalLoss" type="number">
+      Total loss including fee
+    </ResponseField>
+    <ResponseField name="realisedTotalLoss" type="number">
+      Total loss without fee
+    </ResponseField>
+    <ResponseField name="totalVolume" type="number">
+      Total trading volume
+    </ResponseField>
+    <ResponseField name="avgVolume" type="number">
+      Average trading volume
+    </ResponseField>
+    <ResponseField name="avgRoi" type="number">
+      Average ROI including fee
+    </ResponseField>
+    <ResponseField name="realisedAvgRoi" type="number">
+      Average ROI without fee
+    </ResponseField>
+    <ResponseField name="maxRoi" type="number">
+      Maximum ROI including fee
+    </ResponseField>
+    <ResponseField name="realisedMaxRoi" type="number">
+      Maximum ROI without fee
+    </ResponseField>
+    <ResponseField name="pnl" type="number">
+      Profit and Loss including fee
+    </ResponseField>
+    <ResponseField name="realisedPnl" type="number">
+      Profit and Loss without fee
+    </ResponseField>
+    <ResponseField name="maxDrawdown" type="number">
+      Maximum drawdown including fee
+    </ResponseField>
+    <ResponseField name="realisedMaxDrawdown" type="number">
+      Maximum drawdown without fee
+    </ResponseField>
+    <ResponseField name="winRate" type="number">
+      Win rate percentage
+    </ResponseField>
+    <ResponseField name="profitRate" type="number">
+      Profit rate including fee
+    </ResponseField>
+    <ResponseField name="realisedProfitRate" type="number">
+      Profit rate without fee
+    </ResponseField>
+    <ResponseField name="longRate" type="number">
+      Percentage of long positions
+    </ResponseField>
+    <ResponseField name="gainLossRatio" type="number">
+      Gain/loss ratio including fee
+    </ResponseField>
+    <ResponseField name="realisedGainLossRatio" type="number">
+      Gain/loss ratio without fee
+    </ResponseField>
+    <ResponseField name="avgDuration" type="number">
+      Average position duration in seconds
+    </ResponseField>
+    <ResponseField name="avgLeverage" type="number">
+      Average leverage used
+    </ResponseField>
+    <ResponseField name="totalLiquidation" type="number">
+      Total number of liquidations
+    </ResponseField>
+    <ResponseField name="runTimeDays" type="number">
+      Number of days since first trade
+    </ResponseField>
+    <ResponseField name="lastTradeAtTs" type="number">
+      Timestamp of last trade
+    </ResponseField>
+    <ResponseField name="totalFee" type="number">
+      Total fees paid
+    </ResponseField>
+    <ResponseField name="protocol" type="string">
+      Protocol name
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="meta" type="object">
+  Metadata about the response
+  <Expandable title="properties">
+    <ResponseField name="limit" type="number">
+      Number of records returned
+    </ResponseField>
+    <ResponseField name="offset" type="number">
+      Number of records skipped
+    </ResponseField>
+    <ResponseField name="total" type="number">
+      Total number of records matching the query
+    </ResponseField>
+    <ResponseField name="totalPages" type="number">
+      Total number of pages
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Response Example
+
+```json
+{
+  "data": [
+    {
+      "id": "656291e14350fb0b6981e6ce",
+      "account": "0x9f431A46149bab70373B9C6867d2dB8C2F45aa11",
+      "totalTrade": 10,
+      "totalWin": 10,
+      "totalLose": 0,
+      "totalGain": 57060.90483687067,
+      "realisedTotalGain": 53926.13225839167,
+      "totalLoss": 0,
+      "realisedTotalLoss": 0,
+      "totalVolume": 3504221.760537487,
+      "avgVolume": 350422.1760537487,
+      "avgRoi": 33.43488693937744,
+      "realisedAvgRoi": 37.47677597570163,
+      "maxRoi": 104.1059947215304,
+      "realisedMaxRoi": 109.65725913031952,
+      "pnl": 53926.13225839167,
+      "realisedPnl": 57060.90483687067,
+      "maxPnl": 16673.619290696948,
+      "realisedMaxPnl": 17269.147842961316,
+      "maxDrawdown": 0,
+      "realisedMaxDrawdown": 0,
+      "maxDrawdownPnl": 0,
+      "realisedMaxDrawdownPnl": 0,
+      "winRate": 100,
+      "profitRate": 100,
+      "realisedProfitRate": 100,
+      "orderPositionRatio": 2.1,
+      "profitLossRatio": 0,
+      "realisedProfitLossRatio": 0,
+      "longRate": 100,
+      "gainLossRatio": 57060.90483687067,
+      "realisedGainLossRatio": 53926.13225839167,
+      "avgDuration": 68629,
+      "minDuration": 11976,
+      "maxDuration": 206986,
+      "avgLeverage": 20.210503401712398,
+      "minLeverage": 5.020509333784338,
+      "maxLeverage": 30.179561022789816,
+      "totalLiquidation": 0,
+      "totalLiquidationAmount": 0,
+      "runTimeDays": 139,
+      "lastTradeAtTs": 1701696239000,
+      "totalFee": 3134.772578479,
+      "type": "D30",
+      "statisticAt": "2023-12-05T00:05:59.524Z",
+      "lastTradeAt": "2023-12-04T13:23:59.000Z",
+      "createdAt": "2023-11-26T00:31:28.532Z",
+      "isOpenPosition": true,
+      "protocol": "KWENTA"
+    }
+  ],
+  "meta": {
+    "limit": 20,
+    "offset": 0,
+    "total": 15,
+    "totalPages": 1
+  }
+}
+```
