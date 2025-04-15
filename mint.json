@@ -40,6 +40,28 @@
         "api-reference/positions/details-by-tx-hash",
         "api-reference/positions/details-by-id"
       ]
+    },
+    {
+      "group": "Auths",
+      "pages": [
+        "api-reference/auth/login",
+        "api-reference/auth/verify-login",
+        "api-reference/auth/logout",
+        "api-reference/auth/me"
+      ]
+    },
+    {
+      "group": "Copy Trades",
+      "pages": [
+        "api-reference/copy-trade/copy-wallet-list",
+        "api-reference/copy-trade/copy-trade-list",
+        "api-reference/copy-trade/copy-position",
+        "api-reference/copy-trade/copy-orders",
+        "api-reference/copy-trade/create-copy-trade",
+        "api-reference/copy-trade/update-copy-trade",
+        "api-reference/copy-trade/pre-delete-copy-trade",
+        "api-reference/copy-trade/delete-copy-trade"
+      ]
     }
   ],
   "footerSocials": {

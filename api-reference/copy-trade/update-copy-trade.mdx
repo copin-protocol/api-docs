@@ -1,0 +1,297 @@
+---
+title: "Update Copy Trade"
+api: "PUT https://api.copin.io/copy-trades/{id}"
+description: "Update a copy trade configuration"
+---
+
+## Authentication
+This endpoint requires authentication using a JWT token in the Authorization header.
+
+<ParamField header="Authorization" type="string" required>
+    JWT token in the format: `Authorization {token}`
+</ParamField>
+
+## Request
+
+<ParamField path="id" type="string" required>
+    The unique identifier of the copy trade
+</ParamField>
+
+## Request Body
+
+<ParamField body="title" type="string">
+    Display name for the copy trade configuration
+</ParamField>
+
+<ParamField body="volume" type="number">
+    Volume amount to use for copied trades
+</ParamField>
+
+<ParamField body="account" type="string">
+    Address of the account to copy trades from
+</ParamField>
+
+<ParamField body="leverage" type="number">
+    Leverage setting for copied trades
+</ParamField>
+
+<ParamField body="protocol" type="string">
+    Protocol to use for copy trading (e.g., "KILOEX_OPBNB")
+</ParamField>
+
+<ParamField body="exchange" type="string">
+    Exchange platform to use (e.g., "HYPERLIQUID")
+</ParamField>
+
+<ParamField body="copyWalletId" type="string">
+    ID of the wallet to use for copy trading
+</ParamField>
+
+<ParamField body="type" type="string">
+    Type of copy trading (e.g., "COPY_TRADER")
+</ParamField>
+
+<ParamField body="excludingTokenAddresses" type="array">
+    List of token addresses to exclude from copying
+</ParamField>
+
+<ParamField body="tokenAddresses" type="array">
+    List of specific token addresses to copy trades for
+</ParamField>
+
+<ParamField body="reverseCopy" type="boolean" default="false">
+    Whether to copy trades in reverse (opposite direction)
+</ParamField>
+
+<ParamField body="enableStopLoss" type="boolean" default="false">
+    Enable automatic stop loss for copied positions
+</ParamField>
+
+<ParamField body="stopLossType" type="string" default="USD">
+    Type of stop loss calculation (e.g., "PERCENT", "USD")
+</ParamField>
+
+<ParamField body="stopLossAmount" type="number">
+    Value for stop loss (percentage or fixed amount)
+</ParamField>
+
+<ParamField body="volumeProtection" type="boolean" default="true">
+    Enable volume protection to prevent over-sized positions
+</ParamField>
+
+<ParamField body="lookBackOrders" type="number">
+    Number of past orders to analyze when starting copy trade
+</ParamField>
+
+<ParamField body="enableTakeProfit" type="boolean" default="false">
+    Enable automatic take profit for copied positions
+</ParamField>
+
+<ParamField body="takeProfitType" type="string" default="USD">
+    Type of take profit calculation (e.g., "PERCENT", "USD")
+</ParamField>
+
+<ParamField body="takeProfitAmount" type="number">
+    Value for take profit (percentage or fixed amount)
+</ParamField>
+
+<ParamField body="maxVolMultiplier" type="number">
+    Maximum volume multiplier for copied trades
+</ParamField>
+
+<ParamField body="skipLowLeverage" type="boolean" default="false">
+    Skip copying trades with leverage below a threshold
+</ParamField>
+
+<ParamField body="lowLeverage" type="number">
+    Minimum leverage threshold for copied trades
+</ParamField>
+
+<ParamField body="skipLowCollateral" type="boolean" default="false">
+    Skip copying trades with collateral below a threshold
+</ParamField>
+
+<ParamField body="lowCollateral" type="number">
+    Minimum collateral threshold for copied trades
+</ParamField>
+
+<ParamField body="skipLowSize" type="boolean" default="false">
+    Skip copying trades with size below a threshold
+</ParamField>
+
+<ParamField body="lowSize" type="number">
+    Minimum size threshold for copied trades
+</ParamField>
+
+<ParamField body="copyAll" type="boolean" default="true">
+    Whether to copy all trades from the account
+</ParamField>
+
+<ParamField body="hasExclude" type="boolean" default="false">
+    Whether exclusion rules are applied
+</ParamField>
+
+<ParamField body="multipleCopy" type="boolean" default="false">
+    Whether to enable multiple copying from various accounts
+</ParamField>
+
+<ParamField body="side" type="string"  default="BOTH">
+    Which trade sides to copy (e.g., "BOTH", "LONG", "SHORT")
+</ParamField>
+
+## Request Example
+
+```bash
+curl --request PUT \
+--url "https://api.copin.io/copy-trades/67fe13a16c6729db9c4b8f3c" \
+--header 'Content-Type: application/json' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjB4MTUzNTQ4NGMxRWVjMUQyMDNmRTFBNTNFQTExYTYyMWE4ODRBRTA2NyIsInRpbWUiOjE3NDQ2MjYxNjIzODksImFjY2VzcyI6IlVmTkNiTWhMVVMxNzQ0NjI2MTYyMzkwIiwiaWF0IjoxNzQ0NjI2MTYyLCJleHAiOjE3NDUyMzA5NjJ9.LpvhBdxyfehzom-v5tKumAqCptSMkVk7HVKKVtjSpk8' \
+--data '{
+  "volume": 20
+}'
+```
+
+## Response
+The API returns the updated copy trade configuration object with all properties.
+
+<ResponseField name="id" type="string">
+    Unique identifier for the newly created copy trade
+</ResponseField>
+<ResponseField name="title" type="string">
+    Display name of the copy trade configuration
+</ResponseField>
+<ResponseField name="userId" type="string">
+    Identifier of the user who created this copy trade
+</ResponseField>
+<ResponseField name="account" type="string">
+    The account address being copied
+</ResponseField>
+<ResponseField name="accounts" type="array">
+    List of additional accounts for multiple copying
+</ResponseField>
+<ResponseField name="copyWalletId" type="string">
+    Identifier of the wallet used for copying
+</ResponseField>
+<ResponseField name="tokenAddresses" type="array">
+    List of specific token addresses to copy trades for
+</ResponseField>
+<ResponseField name="stopLossType" type="string">
+    Type of stop loss calculation
+</ResponseField>
+<ResponseField name="enableStopLoss" type="boolean">
+    Whether stop loss is enabled
+</ResponseField>
+<ResponseField name="stopLossAmount" type="number">
+    Value for stop loss
+</ResponseField>
+<ResponseField name="takeProfitType" type="string">
+    Type of take profit calculation
+</ResponseField>
+<ResponseField name="enableTakeProfit" type="boolean">
+    Whether take profit is enabled
+</ResponseField>
+<ResponseField name="takeProfitAmount" type="number">
+    Value for take profit
+</ResponseField>
+<ResponseField name="maxVolMultiplier" type="number">
+    Maximum volume multiplier for copied trades
+</ResponseField>
+<ResponseField name="leverage" type="number">
+    Leverage setting for copied trades
+</ResponseField>
+<ResponseField name="volume" type="number">
+    Volume amount for copied trades
+</ResponseField>
+<ResponseField name="volumeProtection" type="boolean">
+    Whether volume protection is enabled
+</ResponseField>
+<ResponseField name="lookBackOrders" type="number">
+    Number of orders to look back when starting copy
+</ResponseField>
+<ResponseField name="reverseCopy" type="boolean">
+    Whether to copy trades in reverse
+</ResponseField>
+<ResponseField name="skipLowLeverage" type="boolean">
+    Whether to skip trades with low leverage
+</ResponseField>
+<ResponseField name="lowLeverage" type="number">
+    Threshold for low leverage
+</ResponseField>
+<ResponseField name="skipLowCollateral" type="boolean">
+    Whether to skip trades with low collateral
+</ResponseField>
+<ResponseField name="lowCollateral" type="number">
+    Threshold for low collateral
+</ResponseField>
+<ResponseField name="skipLowSize" type="boolean">
+    Whether to skip trades with low size
+</ResponseField>
+<ResponseField name="lowSize" type="number">
+    Threshold for low size
+</ResponseField>
+<ResponseField name="copyAll" type="boolean">
+    Whether to copy all trades from the account
+</ResponseField>
+<ResponseField name="status" type="string">
+    Current status of the copy trade (RUNNING/STOPPED)
+</ResponseField>
+<ResponseField name="multipleCopy" type="boolean">
+    Whether multiple copying is enabled
+</ResponseField>
+<ResponseField name="exchange" type="string">
+    Exchange platform being used
+</ResponseField>
+<ResponseField name="side" type="string">
+    Which trade sides to copy
+</ResponseField>
+<ResponseField name="type" type="string">
+    Type of copy trading
+</ResponseField>
+<ResponseField name="protocol" type="string">
+    Protocol being used for trading
+</ResponseField>
+<ResponseField name="excludingTokenAddresses" type="array">
+    List of token addresses to exclude from copying
+</ResponseField>
+<ResponseField name="createdAt" type="string">
+    Timestamp when the copy trade was created
+</ResponseField>
+
+## Response Example
+
+```json
+{
+  "id": "67fe13a16c6729db9c4b8f3c",
+  "title": "Test",
+  "userId": "654849d04857e1f744646cdd",
+  "account": "0x986f7BF3A89AAa88df6c5d5DD6EED65AB582CC21",
+  "accounts": [],
+  "copyWalletId": "6780e1a8cf5b4c9659f7a4cb",
+  "tokenAddresses": [],
+  "stopLossType": "PERCENT",
+  "enableStopLoss": false,
+  "stopLossAmount": 0,
+  "takeProfitType": "PERCENT",
+  "enableTakeProfit": false,
+  "takeProfitAmount": 0,
+  "maxVolMultiplier": 1,
+  "leverage": 3,
+  "volume": 20,
+  "volumeProtection": false,
+  "lookBackOrders": null,
+  "reverseCopy": false,
+  "skipLowLeverage": false,
+  "lowLeverage": 2,
+  "skipLowCollateral": false,
+  "skipLowSize": false,
+  "copyAll": true,
+  "status": "RUNNING",
+  "multipleCopy": false,
+  "exchange": "HYPERLIQUID",
+  "side": "BOTH",
+  "type": "COPY_TRADER",
+  "protocol": "KILOEX_MANTA",
+  "excludingTokenAddresses": [],
+  "createdAt": "2025-04-15T08:06:57.341Z"
+}
+```

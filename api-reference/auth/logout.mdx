@@ -1,0 +1,23 @@
+---
+title: "Logout"
+api: "POST https://api.copin.io/auth/logout"
+description: "Logout"
+---
+
+## Authentication
+This endpoint requires authentication using a JWT token in the Authorization header.
+
+<ParamField header="Authorization" type="string" required>
+    JWT token in the format: `Authorization {token}`
+</ParamField>
+
+## Request Example
+
+```bash
+curl --request POST \
+--url "https://api.copin.io/auth/logout" \
+--header 'Content-Type: application/json' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjB4MTUzNTQ4NGMxRWVjMUQyMDNmRTFBNTNFQTExYTYyMWE4ODRBRTA2NyIsInRpbWUiOjE3NDQ2MjYxNjIzODksImFjY2VzcyI6IlVmTkNiTWhMVVMxNzQ0NjI2MTYyMzkwIiwiaWF0IjoxNzQ0NjI2MTYyLCJleHAiOjE3NDUyMzA5NjJ9.LpvhBdxyfehzom-v5tKumAqCptSMkVk7HVKKVtjSpk8' \
+```
+## Response
+Status: 201 Created
