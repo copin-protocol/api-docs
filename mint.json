@@ -44,23 +44,37 @@
     {
       "group": "Auths",
       "pages": [
-        "api-reference/auth/login",
-        "api-reference/auth/verify-login",
-        "api-reference/auth/logout",
-        "api-reference/auth/me"
+        "api-reference/auths/login",
+        "api-reference/auths/verify-login",
+        "api-reference/auths/logout",
+        "api-reference/auths/me"
       ]
     },
     {
       "group": "Copy Trades",
       "pages": [
-        "api-reference/copy-trade/copy-wallet-list",
-        "api-reference/copy-trade/copy-trade-list",
-        "api-reference/copy-trade/copy-position",
-        "api-reference/copy-trade/copy-orders",
-        "api-reference/copy-trade/create-copy-trade",
-        "api-reference/copy-trade/update-copy-trade",
-        "api-reference/copy-trade/pre-delete-copy-trade",
-        "api-reference/copy-trade/delete-copy-trade"
+        "api-reference/copy-trades/copy-wallet-list",
+        "api-reference/copy-trades/copy-trade-list",
+        "api-reference/copy-trades/copy-position",
+        "api-reference/copy-trades/copy-orders",
+        "api-reference/copy-trades/create-copy-trade",
+        "api-reference/copy-trades/update-copy-trade",
+        "api-reference/copy-trades/pre-delete-copy-trade",
+        "api-reference/copy-trades/delete-copy-trade",
+        "api-reference/copy-trades/activity-log"
+      ]
+    },
+    {
+      "group": "Position Statistics",
+      "pages": [
+        "api-reference/position-statistics/details-by-account",
+        "api-reference/position-statistics/list"
+      ]
+    },
+    {
+      "group": "Wallets",
+      "pages": [
+        "api-reference/wallets/withdraw"
       ]
     }
   ],

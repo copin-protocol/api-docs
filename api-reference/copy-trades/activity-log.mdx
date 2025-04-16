@@ -1,0 +1,209 @@
+---
+title: "Activity Logs"
+api: "POST https://api.copin.io/activity-logs/page"
+description: "Retrieve activity logs with pagination"
+---
+
+## Authentication
+This endpoint requires authentication using a JWT token in the Authorization header.
+
+<ParamField header="Authorization" type="string" required>
+    JWT token in the format: `Authorization {token}`
+</ParamField>
+
+## Request Body
+
+<ParamField body="pagination" type="object">
+    Pagination parameters
+    <Expandable title="properties">
+        <ParamField body="limit" type="number" default="20">
+            Number of records to return
+        </ParamField>
+        <ParamField body="offset" type="number" default="0">
+            Number of records to skip
+        </ParamField>
+    </Expandable>
+</ParamField>
+
+<ParamField body="sortBy" type="string" default="createdAt">
+    Field to sort the results by
+</ParamField>
+
+<ParamField body="sortType" type="string" default="desc">
+    Sort direction, either "asc" or "desc"
+</ParamField>
+
+## Request Example
+
+```bash
+curl --request POST \
+--url "https://api.copin.io/activity-logs/page?limit=20&offset=0" \
+--header 'Content-Type: application/json' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjB4MTUzNTQ4NGMxRWVjMUQyMDNmRTFBNTNFQTExYTYyMWE4ODRBRTA2NyIsInRpbWUiOjE3NDQ2MjYxNjIzODksImFjY2VzcyI6IlVmTkNiTWhMVVMxNzQ0NjI2MTYyMzkwIiwiaWF0IjoxNzQ0NjI2MTYyLCJleHAiOjE3NDUyMzA5NjJ9.LpvhBdxyfehzom-v5tKumAqCptSMkVk7HVKKVtjSpk8' \
+--data '{"pagination":{"limit":20,"offset":0},"sortBy":"createdAt","sortType":"desc"}'
+```
+## Response
+The response includes a data array containing activity log objects and a meta object with pagination information.
+
+<ResponseField name="data" type="array">
+    Array of activity log objects
+    <Expandable title="properties">
+        <ResponseField name="id" type="string">
+            Unique identifier for the activity log
+        </ResponseField>
+        <ResponseField name="protocol" type="string">
+            Protocol used for the activity
+        </ResponseField>
+        <ResponseField name="sourceAccount" type="string">
+            The source account address that was copied from
+        </ResponseField>
+        <ResponseField name="userId" type="string">
+            Identifier of the user who owns this activity
+        </ResponseField>
+        <ResponseField name="copyOrderId" type="string">
+            Identifier of the copy order
+        </ResponseField>
+        <ResponseField name="copyTradeTitle" type="string">
+            Display name of the copy trade configuration
+        </ResponseField>
+        <ResponseField name="exchange" type="string">
+            Exchange where the activity occurred
+        </ResponseField>
+        <ResponseField name="indexToken" type="string">
+            Token identifier for the indexed token
+        </ResponseField>
+        <ResponseField name="pair" type="string">
+            Trading pair (e.g., "ETH-USDT")
+        </ResponseField>
+        <ResponseField name="price" type="number">
+            Execution price for the activity
+        </ResponseField>
+        <ResponseField name="sourcePrice" type="number">
+            Price in the source transaction
+        </ResponseField>
+        <ResponseField name="copyTradeId" type="string">
+            Identifier of the copy trade configuration
+        </ResponseField>
+        <ResponseField name="volume" type="number">
+            Volume amount for the activity
+        </ResponseField>
+        <ResponseField name="leverage" type="number">
+            Leverage used for the activity
+        </ResponseField>
+        <ResponseField name="isLong" type="boolean">
+            Whether the position is long (true) or short (false)
+        </ResponseField>
+        <ResponseField name="type" type="string">
+            Type of activity (e.g., "OPEN", "CLOSE")
+        </ResponseField>
+        <ResponseField name="isSuccess" type="boolean">
+            Whether the activity was successful
+        </ResponseField>
+        <ResponseField name="sourceTxHash" type="string">
+            Transaction hash from the source
+        </ResponseField>
+        <ResponseField name="copyWalletId" type="string">
+            Identifier of the copy wallet
+        </ResponseField>
+        <ResponseField name="copyWalletName" type="string">
+            Name of the copy wallet
+        </ResponseField>
+        <ResponseField name="cexOrderId" type="string">
+            Order ID in the centralized exchange, if applicable
+        </ResponseField>
+        <ResponseField name="isReverse" type="boolean">
+            Whether this is a reverse copy
+        </ResponseField>
+        <ResponseField name="copyPositionId" type="string">
+            Identifier of the copy position
+        </ResponseField>
+        <ResponseField name="createdAt" type="string">
+            Timestamp when the activity occurred
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+
+<ResponseField name="meta" type="object">
+    Metadata about the response
+    <Expandable title="properties">
+        <ResponseField name="limit" type="number">
+            Number of records returned
+        </ResponseField>
+        <ResponseField name="offset" type="number">
+            Number of records skipped
+        </ResponseField>
+        <ResponseField name="total" type="number">
+            Total number of records matching the query
+        </ResponseField>
+        <ResponseField name="totalPages" type="number">
+            Total number of pages
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+
+## Response Example
+
+```json
+{
+  "data": [
+    {
+      "id": "67fa2b4990b940181641703e",
+      "protocol": "AVANTIS_BASE",
+      "sourceAccount": "0x196ae16A9387a3Dc5De811467A2E37D7FeBeD304",
+      "userId": "654849d04857e1f744646cdd",
+      "copyOrderId": "67fa2b4990b940181641703c",
+      "copyTradeTitle": "Wink tongue",
+      "exchange": "HYPERLIQUID",
+      "indexToken": "AVANTIS_BASE-0",
+      "pair": "ETH-USDT",
+      "price": 1591.31,
+      "sourcePrice": 1591.47167907,
+      "copyTradeId": "67cd2e99b302b7331a29173a",
+      "volume": 0.01,
+      "leverage": 10,
+      "isLong": true,
+      "type": "CLOSE",
+      "isSuccess": true,
+      "sourceTxHash": "0x82f26df0738da549e0491c298a4619da0b0b71797ce01a44ead626b2ea0ae240",
+      "copyWalletId": "67b1a1df64f2f57162f1cab5",
+      "copyWalletName": "Copin Lite",
+      "cexOrderId": "c65fdd5a-ae66-4a12-a27f-0b3e4055f261",
+      "isReverse": false,
+      "copyPositionId": "67fa2a77839d60c22debe83e",
+      "createdAt": "2025-04-12T08:58:49.703Z"
+    },
+    {
+      "id": "67fa2a77839d60c22debe845",
+      "protocol": "AVANTIS_BASE",
+      "sourceAccount": "0x196ae16A9387a3Dc5De811467A2E37D7FeBeD304",
+      "userId": "654849d04857e1f744646cdd",
+      "copyOrderId": "67fa2a77839d60c22debe841",
+      "copyTradeTitle": "Wink tongue",
+      "exchange": "HYPERLIQUID",
+      "indexToken": "AVANTIS_BASE-0",
+      "pair": "ETH-USDT",
+      "price": 1592.36,
+      "sourcePrice": 1593.072615343,
+      "copyTradeId": "67cd2e99b302b7331a29173a",
+      "volume": 0.01,
+      "leverage": 10,
+      "isLong": true,
+      "type": "OPEN",
+      "isSuccess": true,
+      "sourceTxHash": "0x317efa7839f5ab4fe6c6b81e5feb21d1c0909a0e6d0c833c2a9ebbe75e0327ae",
+      "copyWalletId": "67b1a1df64f2f57162f1cab5",
+      "copyWalletName": "Copin Lite",
+      "cexOrderId": "6a5b43dc-5de3-4e47-b051-1ca9f28f00f1",
+      "isReverse": false,
+      "copyPositionId": "67fa2a77839d60c22debe83e",
+      "createdAt": "2025-04-12T08:55:19.827Z"
+    }
+  ],
+  "meta": {
+    "limit": 20,
+    "offset": 0,
+    "total": 2,
+    "totalPages": 2
+  }
+}
+```

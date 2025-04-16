@@ -1,0 +1,550 @@
+---
+title: "Position Statistic of Trader"
+api: "GET https://api.copin.io/{protocol}/position/statistic/trader/{account}"
+description: "Retrieve details for a specific trader position statistic"
+---
+
+## Authentication
+This endpoint requires authentication using a JWT token in the Authorization header.
+
+<ParamField header="Authorization" type="string" required>
+    JWT token in the format: `Authorization {token}`
+</ParamField>
+
+## Path Parameters
+
+<ParamField path="protocol" type="string" required>
+  The protocol to get position details for. Supported values include: `GMX`,
+  `KWENTA`, `POLYNOMIAL`, `POLYNOMIAL_L2`, `GMX_V2_AVAX`, `GMX_V2`, `GNS`,
+  `GNS_POLY`, `GNS_BASE`, `GNS_APE`, `LEVEL_BNB`, `LEVEL_ARB`, `MUX_ARB`,
+  `APOLLOX_BNB`, `AVANTIS_BASE`, `EQUATION_ARB`, `LOGX_BLAST`, `LOGX_MODE`,
+  `MYX_ARB`, `DEXTORO`, `VELA_ARB`, `HMX_ARB`, `SYNTHETIX_V3`,
+  `SYNTHETIX_V3_ARB`, `KTX_MANTLE`, `CYBERDEX`, `YFX_ARB`, `KILOEX_OPBNB`,
+  `KILOEX_BNB`, `KILOEX_MANTA`, `KILOEX_BASE`, `ROLLIE_SCROLL`, `MUMMY_FANTOM`,
+  `HYPERLIQUID`, `SYNFUTURE_BASE`, `MORPHEX_FANTOM`, `PERENNIAL_ARB`,
+  `BSX_BASE`, `DYDX`, `UNIDEX_ARB`, `VERTEX_ARB`, `HORIZON_BNB`,
+  `HOLDSTATION_ZKSYNC`, `ZENO_METIS`, `LINEHUB_LINEA`, `BMX_BASE`, `FOXIFY_ARB`,
+  `APOLLOX_BASE`, `GMX_AVAX`, `SYNTHETIX`, `DEPERP_BASE`, `ELFI_ARB`
+</ParamField>
+
+<ParamField path="account" type="string" required>
+  The address of trader
+</ParamField>
+
+## Request Example
+
+```bash
+curl -X GET "https://api.copin.io/KILOEX_BASE/position/statistic/trader/0xd649A0876453Fc7626569B28E364262192874E18" \
+--header 'Content-Type: application/json' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjB4MTUzNTQ4NGMxRWVjMUQyMDNmRTFBNTNFQTExYTYyMWE4ODRBRTA2NyIsInRpbWUiOjE3NDQ2MjYxNjIzODksImFjY2VzcyI6IlVmTkNiTWhMVVMxNzQ0NjI2MTYyMzkwIiwiaWF0IjoxNzQ0NjI2MTYyLCJleHAiOjE3NDUyMzA5NjJ9.LpvhBdxyfehzom-v5tKumAqCptSMkVk7HVKKVtjSpk8'
+```
+
+## Response:
+The API returns position statistics for different time periods (FULL, D60, D30, D15, D7).
+
+<ResponseField name="FULL" type="object">
+    All-time statistics for the trader
+</ResponseField>
+<ResponseField name="D60" type="object">
+    Statistics for the last 60 days
+</ResponseField>
+<ResponseField name="D30" type="object">
+    Statistics for the last 30 days
+</ResponseField>
+<ResponseField name="D15" type="object">
+    Statistics for the last 15 days
+</ResponseField>
+<ResponseField name="D7" type="object">
+    Statistics for the last 7 days
+</ResponseField>
+
+Each time period contains the following fields:
+<ResponseField name="id" type="string">
+    Unique identifier for the statistic record
+</ResponseField>
+<ResponseField name="account" type="string">
+    The address of the trader
+</ResponseField>
+<ResponseField name="totalTrade" type="number">
+    Total number of trades
+</ResponseField>
+<ResponseField name="totalWin" type="number">
+    Total number of winning trades
+</ResponseField>
+<ResponseField name="totalLose" type="number">
+    Total number of losing trades
+</ResponseField>
+<ResponseField name="totalGain" type="number">
+    Total gain amount from all trades
+</ResponseField>
+<ResponseField name="realisedTotalGain" type="number">
+    Realised total gain from closed positions
+</ResponseField>
+<ResponseField name="totalLoss" type="number">
+    Total loss amount from all trades
+</ResponseField>
+<ResponseField name="realisedTotalLoss" type="number">
+    Realised total loss from closed positions
+</ResponseField>
+<ResponseField name="totalVolume" type="number">
+    Total trading volume
+</ResponseField>
+<ResponseField name="avgVolume" type="number">
+    Average volume per trade
+</ResponseField>
+<ResponseField name="avgRoi" type="number">
+    Average ROI (Return on Investment) across all trades
+</ResponseField>
+<ResponseField name="realisedAvgRoi" type="number">
+    Realised average ROI from closed positions
+</ResponseField>
+<ResponseField name="maxRoi" type="number">
+    Maximum ROI achieved in a single trade
+</ResponseField>
+<ResponseField name="realisedMaxRoi" type="number">
+    Realised maximum ROI from closed positions
+</ResponseField>
+<ResponseField name="pnl" type="number">
+    Total profit and loss
+</ResponseField>
+<ResponseField name="realisedPnl" type="number">
+    Realised profit and loss from closed positions
+</ResponseField>
+<ResponseField name="maxPnl" type="number">
+    Maximum profit and loss achieved
+</ResponseField>
+<ResponseField name="realisedMaxPnl" type="number">
+    Realised maximum profit and loss from closed positions
+</ResponseField>
+<ResponseField name="realisedMaxDrawdown" type="number">
+    Maximum drawdown from realised positions
+</ResponseField>
+<ResponseField name="realisedMaxDrawdownPnl" type="number">
+    Maximum drawdown amount from realised positions
+</ResponseField>
+<ResponseField name="winRate" type="number">
+    Percentage of winning trades
+</ResponseField>
+<ResponseField name="profitRate" type="number">
+    Percentage of profitable trades
+</ResponseField>
+<ResponseField name="realisedProfitRate" type="number">
+    Percentage of profitable closed positions
+</ResponseField>
+<ResponseField name="orderPositionRatio" type="number">
+    Ratio of orders to positions
+</ResponseField>
+<ResponseField name="profitLossRatio" type="number">
+    Ratio of profit to loss
+</ResponseField>
+<ResponseField name="realisedProfitLossRatio" type="number">
+    Ratio of realised profit to realised loss
+</ResponseField>
+<ResponseField name="longRate" type="number">
+    Percentage of long positions
+</ResponseField>
+<ResponseField name="gainLossRatio" type="number">
+    Ratio of gains to losses
+</ResponseField>
+<ResponseField name="realisedGainLossRatio" type="number">
+    Ratio of realised gains to realised losses
+</ResponseField>
+<ResponseField name="avgDuration" type="number">
+    Average duration of positions in hours
+</ResponseField>
+<ResponseField name="minDuration" type="number">
+    Minimum duration of any position in hours
+</ResponseField>
+<ResponseField name="maxDuration" type="number">
+    Maximum duration of any position in hours
+</ResponseField>
+<ResponseField name="avgLeverage" type="number">
+    Average leverage used across all positions
+</ResponseField>
+<ResponseField name="minLeverage" type="number">
+    Minimum leverage used in any position
+</ResponseField>
+<ResponseField name="maxLeverage" type="number">
+    Maximum leverage used in any position
+</ResponseField>
+<ResponseField name="totalLiquidation" type="number">
+    Total number of liquidated positions
+</ResponseField>
+<ResponseField name="totalLiquidationAmount" type="number">
+    Total amount lost due to liquidations
+</ResponseField>
+<ResponseField name="runTimeDays" type="number">
+    Number of days the trader has been active
+</ResponseField>
+<ResponseField name="lastTradeAtTs" type="number">
+    Timestamp of the last trade (milliseconds)
+</ResponseField>
+<ResponseField name="totalFee" type="number">
+    Total fees paid across all trades
+</ResponseField>
+<ResponseField name="ranking" type="object">
+    Percentile rankings for various metrics relative to other traders
+</ResponseField>
+<ResponseField name="type" type="string">
+    Time period for this statistic (e.g., "FULL", "D7")
+</ResponseField>
+<ResponseField name="statisticAt" type="string">
+    Timestamp when these statistics were calculated
+</ResponseField>
+<ResponseField name="lastTradeAt" type="string">
+    Timestamp of the last trade (ISO format)
+</ResponseField>
+<ResponseField name="indexTokens" type="array">
+    List of token identifiers traded
+</ResponseField>
+<ResponseField name="protocol" type="string">
+    Protocol identifier
+</ResponseField>
+<ResponseField name="createdAt" type="string">
+    Timestamp when this statistic record was created
+</ResponseField>
+<ResponseField name="isOpenPosition" type="boolean">
+    Whether the trader has any open positions
+</ResponseField>
+
+## Response Example
+
+```json
+{
+  "FULL": {
+    "id": "67fdd42f3219b4577ba50583",
+    "account": "0xd649A0876453Fc7626569B28E364262192874E18",
+    "totalTrade": 3,
+    "totalWin": 3,
+    "totalLose": 0,
+    "totalGain": 3323185.8880331796,
+    "realisedTotalGain": 3323232.8924591998,
+    "totalLoss": 0,
+    "realisedTotalLoss": 0,
+    "totalVolume": 33574.590038,
+    "avgVolume": 11191.530012666668,
+    "avgRoi": 989852.6666666666,
+    "realisedAvgRoi": 989866.6666666666,
+    "maxRoi": 989886,
+    "realisedMaxRoi": 989900,
+    "pnl": 3323185.8880331796,
+    "realisedPnl": 3323232.8924591998,
+    "maxPnl": 3125500.72459684,
+    "realisedMaxPnl": 3125544.93315316,
+    "realisedMaxDrawdown": 0,
+    "realisedMaxDrawdownPnl": 0,
+    "winRate": 100,
+    "profitRate": 100,
+    "realisedProfitRate": 100,
+    "orderPositionRatio": 2,
+    "profitLossRatio": 0,
+    "realisedProfitLossRatio": 0,
+    "longRate": 100,
+    "gainLossRatio": 3323185.8880331796,
+    "realisedGainLossRatio": 3323232.8924591998,
+    "avgDuration": 0,
+    "minDuration": null,
+    "maxDuration": 0,
+    "avgLeverage": 100,
+    "minLeverage": 100,
+    "maxLeverage": 100,
+    "totalLiquidation": 0,
+    "totalLiquidationAmount": 0,
+    "runTimeDays": 1,
+    "lastTradeAtTs": 1744660533000,
+    "totalFee": 47.004426020000004,
+    "ranking": {
+      "avgDuration": 100,
+      "avgLeverage": 95.61863173216885,
+      "avgVolume": 97.96215429403202,
+      "orderPositionRatio": 20.18922852983988,
+      "pnl": 99.98544395924309,
+      "realisedAvgRoi": 99.98544395924309,
+      "realisedMaxDrawdown": 97.3216885007278,
+      "realisedMaxRoi": 99.98544395924309,
+      "realisedPnl": 99.98544395924309,
+      "realisedProfitLossRatio": 94.65793304221252,
+      "realisedProfitRate": 97.37991266375546,
+      "totalTrade": 74.80349344978166,
+      "winRate": 97.37991266375546
+    },
+    "type": "FULL",
+    "statisticAt": "2025-04-15T03:36:15.663Z",
+    "lastTradeAt": "2025-04-14T19:55:33.000Z",
+    "indexTokens": [
+      "KILOEX_BASE-1"
+    ],
+    "protocol": "KILOEX_BASE",
+    "createdAt": "2025-04-15T03:36:15.694Z",
+    "isOpenPosition": false
+  },
+  "D60": {
+    "id": "67fdc1fc3219b4577b75a8cb",
+    "account": "0xd649A0876453Fc7626569B28E364262192874E18",
+    "totalTrade": 3,
+    "totalWin": 3,
+    "totalLose": 0,
+    "totalGain": 3323185.8880331796,
+    "realisedTotalGain": 3323232.8924591998,
+    "totalLoss": 0,
+    "realisedTotalLoss": 0,
+    "totalVolume": 33574.590038,
+    "avgVolume": 11191.530012666668,
+    "avgRoi": 989852.6666666666,
+    "realisedAvgRoi": 989866.6666666666,
+    "maxRoi": 989886,
+    "realisedMaxRoi": 989900,
+    "pnl": 3323185.8880331796,
+    "realisedPnl": 3323232.8924591998,
+    "maxPnl": 3125500.72459684,
+    "realisedMaxPnl": 3125544.93315316,
+    "realisedMaxDrawdown": 0,
+    "realisedMaxDrawdownPnl": 0,
+    "winRate": 100,
+    "profitRate": 100,
+    "realisedProfitRate": 100,
+    "orderPositionRatio": 2,
+    "profitLossRatio": 0,
+    "realisedProfitLossRatio": 0,
+    "longRate": 100,
+    "gainLossRatio": 3323185.8880331796,
+    "realisedGainLossRatio": 3323232.8924591998,
+    "avgDuration": 0,
+    "minDuration": 0,
+    "maxDuration": 0,
+    "avgLeverage": 100,
+    "minLeverage": 100,
+    "maxLeverage": 100,
+    "totalLiquidation": 0,
+    "totalLiquidationAmount": 0,
+    "runTimeDays": 1,
+    "lastTradeAtTs": 1744660533000,
+    "totalFee": 47.004426020000004,
+    "ranking": {
+      "avgDuration": 100,
+      "avgLeverage": 92.71879483500717,
+      "avgVolume": 97.63271162123385,
+      "orderPositionRatio": 20.91104734576757,
+      "pnl": 99.96413199426112,
+      "realisedAvgRoi": 99.96413199426112,
+      "realisedMaxDrawdown": 96.95121951219512,
+      "realisedMaxRoi": 99.96413199426112,
+      "realisedPnl": 99.96413199426112,
+      "realisedProfitLossRatio": 94.18938307030129,
+      "realisedProfitRate": 97.02295552367288,
+      "totalTrade": 73.56527977044476,
+      "winRate": 97.02295552367288
+    },
+    "type": "D60",
+    "statisticAt": "2025-04-15T02:18:35.979Z",
+    "lastTradeAt": "2025-04-14T19:55:33.000Z",
+    "indexTokens": [
+      "KILOEX_BASE-1"
+    ],
+    "protocol": "KILOEX_BASE",
+    "createdAt": "2025-04-15T02:18:35.996Z",
+    "isOpenPosition": false
+  },
+  "D30": {
+    "id": "67fdc1a33219b4577b7463cd",
+    "account": "0xd649A0876453Fc7626569B28E364262192874E18",
+    "totalTrade": 3,
+    "totalWin": 3,
+    "totalLose": 0,
+    "totalGain": 3323185.8880331796,
+    "realisedTotalGain": 3323232.8924591998,
+    "totalLoss": 0,
+    "realisedTotalLoss": 0,
+    "totalVolume": 33574.590038,
+    "avgVolume": 11191.530012666668,
+    "avgRoi": 989852.6666666666,
+    "realisedAvgRoi": 989866.6666666666,
+    "maxRoi": 989886,
+    "realisedMaxRoi": 989900,
+    "pnl": 3323185.8880331796,
+    "realisedPnl": 3323232.8924591998,
+    "maxPnl": 3125500.72459684,
+    "realisedMaxPnl": 3125544.93315316,
+    "realisedMaxDrawdown": 0,
+    "realisedMaxDrawdownPnl": 0,
+    "winRate": 100,
+    "profitRate": 100,
+    "realisedProfitRate": 100,
+    "orderPositionRatio": 2,
+    "profitLossRatio": 0,
+    "realisedProfitLossRatio": 0,
+    "longRate": 100,
+    "gainLossRatio": 3323185.8880331796,
+    "realisedGainLossRatio": 3323232.8924591998,
+    "avgDuration": 0,
+    "minDuration": 0,
+    "maxDuration": 0,
+    "avgLeverage": 100,
+    "minLeverage": 100,
+    "maxLeverage": 100,
+    "totalLiquidation": 0,
+    "totalLiquidationAmount": 0,
+    "runTimeDays": 1,
+    "lastTradeAtTs": 1744660533000,
+    "totalFee": 47.004426020000004,
+    "ranking": {
+      "avgDuration": 100,
+      "avgLeverage": 90.5701754385965,
+      "avgVolume": 95.72368421052632,
+      "orderPositionRatio": 27.083333333333343,
+      "pnl": 99.89035087719299,
+      "realisedAvgRoi": 99.89035087719299,
+      "realisedMaxDrawdown": 96.27192982456141,
+      "realisedMaxRoi": 99.89035087719299,
+      "realisedPnl": 99.89035087719299,
+      "realisedProfitLossRatio": 93.53070175438597,
+      "realisedProfitRate": 96.38157894736842,
+      "totalTrade": 63.59649122807017,
+      "winRate": 96.38157894736842
+    },
+    "type": "D30",
+    "statisticAt": "2025-04-15T02:17:06.810Z",
+    "lastTradeAt": "2025-04-14T19:55:33.000Z",
+    "indexTokens": [
+      "KILOEX_BASE-1"
+    ],
+    "protocol": "KILOEX_BASE",
+    "createdAt": "2025-04-15T02:17:06.814Z",
+    "isOpenPosition": false
+  },
+  "D15": {
+    "id": "67fdc1783219b4577b73a1d1",
+    "account": "0xd649A0876453Fc7626569B28E364262192874E18",
+    "totalTrade": 3,
+    "totalWin": 3,
+    "totalLose": 0,
+    "totalGain": 3323185.8880331796,
+    "realisedTotalGain": 3323232.8924591998,
+    "totalLoss": 0,
+    "realisedTotalLoss": 0,
+    "totalVolume": 33574.590038,
+    "avgVolume": 11191.530012666668,
+    "avgRoi": 989852.6666666666,
+    "realisedAvgRoi": 989866.6666666666,
+    "maxRoi": 989886,
+    "realisedMaxRoi": 989900,
+    "pnl": 3323185.8880331796,
+    "realisedPnl": 3323232.8924591998,
+    "maxPnl": 3125500.72459684,
+    "realisedMaxPnl": 3125544.93315316,
+    "realisedMaxDrawdown": 0,
+    "realisedMaxDrawdownPnl": 0,
+    "winRate": 100,
+    "profitRate": 100,
+    "realisedProfitRate": 100,
+    "orderPositionRatio": 2,
+    "profitLossRatio": 0,
+    "realisedProfitLossRatio": 0,
+    "longRate": 100,
+    "gainLossRatio": 3323185.8880331796,
+    "realisedGainLossRatio": 3323232.8924591998,
+    "avgDuration": 0,
+    "minDuration": 0,
+    "maxDuration": 0,
+    "avgLeverage": 100,
+    "minLeverage": 100,
+    "maxLeverage": 100,
+    "totalLiquidation": 0,
+    "totalLiquidationAmount": 0,
+    "runTimeDays": 1,
+    "lastTradeAtTs": 1744660533000,
+    "totalFee": 47.004426020000004,
+    "ranking": {
+      "avgDuration": 100,
+      "avgLeverage": 95.06172839506173,
+      "avgVolume": 89.7119341563786,
+      "orderPositionRatio": 39.09465020576132,
+      "pnl": 99.58847736625515,
+      "realisedAvgRoi": 99.58847736625515,
+      "realisedMaxDrawdown": 97.53086419753086,
+      "realisedMaxRoi": 99.58847736625515,
+      "realisedPnl": 99.58847736625515,
+      "realisedProfitLossRatio": 93.4156378600823,
+      "realisedProfitRate": 97.53086419753086,
+      "totalTrade": 70.37037037037037,
+      "winRate": 97.53086419753086
+    },
+    "type": "D15",
+    "statisticAt": "2025-04-15T02:16:24.210Z",
+    "lastTradeAt": "2025-04-14T19:55:33.000Z",
+    "indexTokens": [
+      "KILOEX_BASE-1"
+    ],
+    "protocol": "KILOEX_BASE",
+    "createdAt": "2025-04-15T02:16:24.229Z",
+    "isOpenPosition": false
+  },
+  "D7": {
+    "id": "67fdc16e3219b4577b73531f",
+    "account": "0xd649A0876453Fc7626569B28E364262192874E18",
+    "totalTrade": 3,
+    "totalWin": 3,
+    "totalLose": 0,
+    "totalGain": 3323185.8880331796,
+    "realisedTotalGain": 3323232.8924591998,
+    "totalLoss": 0,
+    "realisedTotalLoss": 0,
+    "totalVolume": 33574.590038,
+    "avgVolume": 11191.530012666668,
+    "avgRoi": 989852.6666666666,
+    "realisedAvgRoi": 989866.6666666666,
+    "maxRoi": 989886,
+    "realisedMaxRoi": 989900,
+    "pnl": 3323185.8880331796,
+    "realisedPnl": 3323232.8924591998,
+    "maxPnl": 3125500.72459684,
+    "realisedMaxPnl": 3125544.93315316,
+    "realisedMaxDrawdown": 0,
+    "realisedMaxDrawdownPnl": 0,
+    "winRate": 100,
+    "profitRate": 100,
+    "realisedProfitRate": 100,
+    "orderPositionRatio": 2,
+    "profitLossRatio": 0,
+    "realisedProfitLossRatio": 0,
+    "longRate": 100,
+    "gainLossRatio": 3323185.8880331796,
+    "realisedGainLossRatio": 3323232.8924591998,
+    "avgDuration": 0,
+    "minDuration": 0,
+    "maxDuration": 0,
+    "avgLeverage": 100,
+    "minLeverage": 100,
+    "maxLeverage": 100,
+    "totalLiquidation": 0,
+    "totalLiquidationAmount": 0,
+    "runTimeDays": 1,
+    "lastTradeAtTs": 1744660533000,
+    "totalFee": 47.004426020000004,
+    "ranking": {
+      "avgDuration": 100,
+      "avgLeverage": 92.5531914893617,
+      "avgVolume": 82.97872340425532,
+      "orderPositionRatio": 46.808510638297875,
+      "pnl": 98.93617021276596,
+      "realisedAvgRoi": 98.93617021276596,
+      "realisedMaxDrawdown": 97.87234042553192,
+      "realisedMaxRoi": 98.93617021276596,
+      "realisedPnl": 98.93617021276596,
+      "realisedProfitLossRatio": 92.5531914893617,
+      "realisedProfitRate": 97.87234042553192,
+      "totalTrade": 60.63829787234043,
+      "winRate": 97.87234042553192
+    },
+    "type": "D7",
+    "statisticAt": "2025-04-15T02:16:14.351Z",
+    "lastTradeAt": "2025-04-14T19:55:33.000Z",
+    "indexTokens": [
+      "KILOEX_BASE-1"
+    ],
+    "protocol": "KILOEX_BASE",
+    "createdAt": "2025-04-15T02:16:14.392Z",
+    "isOpenPosition": false
+  }
+}
+```

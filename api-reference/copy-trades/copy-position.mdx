@@ -1,0 +1,223 @@
+---
+title: "Copy Positions"
+api: "POST https://api.copin.io/copy-positions/page"
+description: "Retrieve copy positions with pagination"
+---
+
+## Authentication
+This endpoint requires authentication using a JWT token in the Authorization header.
+
+<ParamField header="Authorization" type="string" required>
+    JWT token in the format: `Authorization {token}`
+</ParamField>
+
+## Request
+
+<ParamField query="limit" type="number" default="20">
+    Number of records to return per page
+</ParamField>
+<ParamField query="offset" type="number" default="0">
+    Number of records to skip for pagination
+</ParamField>
+<ParamField query="status" type="string">
+    Current status of the position ("OPEN/CLOSE")
+</ParamField>
+<ParamField query="isLong" type="boolean">
+    Position side
+</ParamField>
+
+
+## Request Example
+
+```bash
+curl --request POST \
+--url "https://api.copin.io/copy-positions/page?limit=20&offset=0" \
+--header 'Content-Type: application/json' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjB4MTUzNTQ4NGMxRWVjMUQyMDNmRTFBNTNFQTExYTYyMWE4ODRBRTA2NyIsInRpbWUiOjE3NDQ2MjYxNjIzODksImFjY2VzcyI6IlVmTkNiTWhMVVMxNzQ0NjI2MTYyMzkwIiwiaWF0IjoxNzQ0NjI2MTYyLCJleHAiOjE3NDUyMzA5NjJ9.LpvhBdxyfehzom-v5tKumAqCptSMkVk7HVKKVtjSpk8'
+```
+## Response
+The response includes a data array containing position objects and a meta object with pagination information.
+
+<ResponseField name="data" type="array">
+    Array of copy position objects
+    <Expandable title="properties">
+        <ResponseField name="id" type="string">
+            Unique identifier for the copy position
+        </ResponseField>
+        <ResponseField name="userId" type="string">
+            Identifier of the user who owns this position
+        </ResponseField>
+        <ResponseField name="copyTradeId" type="string">
+            Identifier of the copy trade configuration that created this position
+        </ResponseField>
+        <ResponseField name="copyAccount" type="string">
+            The wallet address being copied from
+        </ResponseField>
+        <ResponseField name="positionIndex" type="number">
+            Index of the position in the original account
+        </ResponseField>
+        <ResponseField name="copyPositionIndex" type="number">
+            Index of the position in the copy account
+        </ResponseField>
+        <ResponseField name="indexToken" type="string">
+            Token identifier for the indexed token
+        </ResponseField>
+        <ResponseField name="identifyKey" type="string">
+            Unique key to identify the position
+        </ResponseField>
+        <ResponseField name="pair" type="string">
+            Trading pair (e.g., "ETH-USDT")
+        </ResponseField>
+        <ResponseField name="key" type="string">
+            Unique key for the position
+        </ResponseField>
+        <ResponseField name="sourceOrderTxHashes" type="array">
+            Array of transaction hashes for the source orders
+        </ResponseField>
+        <ResponseField name="sourceSizeDelta" type="string">
+            Size delta in the source position
+        </ResponseField>
+        <ResponseField name="sizeDelta" type="string">
+            Size delta in the copy position
+        </ResponseField>
+        <ResponseField name="totalSizeDelta" type="number">
+            Total size delta for the position
+        </ResponseField>
+        <ResponseField name="sourceInitialVol" type="string">
+            Initial volume in the source position
+        </ResponseField>
+        <ResponseField name="initialVol" type="number">
+            Initial volume in the copy position
+        </ResponseField>
+        <ResponseField name="isLong" type="boolean">
+            Whether the position is long (true) or short (false)
+        </ResponseField>
+        <ResponseField name="entryPrice" type="number">
+            Entry price for the position
+        </ResponseField>
+        <ResponseField name="leverage" type="number">
+            Leverage used for the position
+        </ResponseField>
+        <ResponseField name="stopLossPrice" type="number">
+            Price at which stop loss is triggered
+        </ResponseField>
+        <ResponseField name="stopLossAmount" type="number">
+            Amount for stop loss
+        </ResponseField>
+        <ResponseField name="takeProfitPrice" type="number">
+            Price at which take profit is triggered
+        </ResponseField>
+        <ResponseField name="takeProfitAmount" type="number">
+            Amount for take profit
+        </ResponseField>
+        <ResponseField name="pnl" type="number">
+            Total profit and loss
+        </ResponseField>
+        <ResponseField name="realisedPnl" type="number">
+            Realised profit and loss
+        </ResponseField>
+        <ResponseField name="funding" type="number">
+            Funding payments for the position
+        </ResponseField>
+        <ResponseField name="fee" type="number">
+            Fees paid for the position
+        </ResponseField>
+        <ResponseField name="closeType" type="string">
+            How the position was closed (COPY_TRADE/MANUAL/FORCE_CLOSE/TAKE_PROFIT/STOP_LOSS/LIQUIDATE/OVERWRITE)
+        </ResponseField>
+        <ResponseField name="status" type="string">
+            Current status of the position (OPEN/CLOSE)
+        </ResponseField>
+        <ResponseField name="protocol" type="string">
+            Protocol used for the position
+        </ResponseField>
+        <ResponseField name="exchange" type="string">
+            Exchange where the position was opened
+        </ResponseField>
+        <ResponseField name="isReverse" type="boolean">
+            Whether this is a reverse copy position
+        </ResponseField>
+        <ResponseField name="lastOrderAt" type="string">
+            Timestamp of the last order for this position
+        </ResponseField>
+        <ResponseField name="createdAt" type="string">
+            Timestamp when the position was created
+        </ResponseField>
+        <ResponseField name="copyTradeTitle" type="string">
+            Title of the copy trade configuration
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+
+<ResponseField name="meta" type="object">
+    Metadata about the response
+    <Expandable title="properties">
+        <ResponseField name="limit" type="number">
+            Number of records returned
+        </ResponseField>
+        <ResponseField name="offset" type="number">
+            Number of records skipped
+        </ResponseField>
+        <ResponseField name="total" type="number">
+            Total number of records matching the query
+        </ResponseField>
+        <ResponseField name="totalPages" type="number">
+            Total number of pages
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+
+## Response Example
+
+```json
+{
+  "data": [
+    {
+      "id": "67fa2a77839d60c22debe83e",
+      "userId": "654849d04857e1f744646cdd",
+      "copyTradeId": "67cd2e99b302b7331a29173a",
+      "copyAccount": "0x196ae16A9387a3Dc5De811467A2E37D7FeBeD304",
+      "positionIndex": 0,
+      "copyPositionIndex": 0,
+      "indexToken": "AVANTIS_BASE-0",
+      "identifyKey": "67b1a1df64f2f57162f1cab5",
+      "pair": "ETH-USDT",
+      "key": "4fdb8422d34b7bf718687652dd4b4e54",
+      "sourceOrderTxHashes": [
+        "0x317efa7839f5ab4fe6c6b81e5feb21d1c0909a0e6d0c833c2a9ebbe75e0327ae",
+        "0x82f26df0738da549e0491c298a4619da0b0b71797ce01a44ead626b2ea0ae240"
+      ],
+      "sourceSizeDelta": "0",
+      "sizeDelta": "0",
+      "totalSizeDelta": 0.01,
+      "sourceInitialVol": "19.760",
+      "initialVol": 20,
+      "isLong": true,
+      "entryPrice": 1592.36,
+      "leverage": 10,
+      "stopLossPrice": 0,
+      "stopLossAmount": 0,
+      "takeProfitPrice": 0,
+      "takeProfitAmount": 0,
+      "pnl": -0.02711068,
+      "realisedPnl": -0.0096,
+      "funding": 0,
+      "fee": -0.01751068,
+      "closeType": "COPY_TRADE",
+      "status": "CLOSE",
+      "protocol": "AVANTIS_BASE",
+      "exchange": "BYBIT",
+      "isReverse": false,
+      "lastOrderAt": "2025-04-12T08:58:49.657Z",
+      "createdAt": "2025-04-12T08:55:19.786Z",
+      "copyTradeTitle": "Wink tongue"
+    }
+  ],
+  "meta": {
+    "limit": 20,
+    "offset": 0,
+    "total": 1,
+    "totalPages": 1
+  }
+}
+```
