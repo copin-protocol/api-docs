@@ -1,0 +1,81 @@
+---
+title: "Me"
+api: "GET https://api.copin.io/me"
+description: "Get user info"
+---
+
+## Authentication
+This endpoint requires authentication using a JWT token in the Authorization header.
+
+<ParamField header="Authorization" type="string" required>
+    JWT token in the format: `Authorization {token}`
+</ParamField>
+
+## Request Example
+
+```bash
+curl --request GET \
+--url "https://api.copin.io/me" \
+--header 'Content-Type: application/json' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjB4MTUzNTQ4NGMxRWVjMUQyMDNmRTFBNTNFQTExYTYyMWE4ODRBRTA2NyIsInRpbWUiOjE3NDQ2MjYxNjIzODksImFjY2VzcyI6IlVmTkNiTWhMVVMxNzQ0NjI2MTYyMzkwIiwiaWF0IjoxNzQ0NjI2MTYyLCJleHAiOjE3NDUyMzA5NjJ9.LpvhBdxyfehzom-v5tKumAqCptSMkVk7HVKKVtjSpk8' \
+```
+## Response
+<ResponseField name="id" type="string">
+    Unique identifier for the user
+</ResponseField>
+<ResponseField name="username" type="string">
+    User's wallet address used as username
+</ResponseField>
+<ResponseField name="role" type="string">
+    User's role in the system (e.g., "guest", "user", "admin")
+</ResponseField>
+<ResponseField name="isBlocked" type="boolean">
+    Indicates if the user account is blocked
+</ResponseField>
+<ResponseField name="isActivated" type="boolean">
+    Indicates if the user account is activated
+</ResponseField>
+<ResponseField name="blockNote" type="string">
+    Note about block reason if the account is blocked
+</ResponseField>
+<ResponseField name="referralCode" type="string">
+    User's referral code that can be shared with others
+</ResponseField>
+<ResponseField name="isSkippedReferral" type="boolean">
+    Indicates if the user skipped entering a referral code
+</ResponseField>
+<ResponseField name="copyTradeQuota" type="number">
+    Number of copy trades the user can create
+</ResponseField>
+<ResponseField name="plan" type="number">
+    User's subscription plan level
+</ResponseField>
+<ResponseField name="createdAt" type="string">
+    Timestamp when the user account was created
+</ResponseField>
+<ResponseField name="access_token" type="string">
+    JWT token to be used for authenticated API calls
+</ResponseField>
+<ResponseField name="isAddedReferral" type="boolean">
+    Indicates if the user has added a referral code
+</ResponseField>
+
+## Response Example
+
+```json
+{
+    "id": "654849d04857e1f744646cdd",
+    "username": "0x1535484c1eec1d203fe1a53ea11a621a884ae067",
+    "role": "guest",
+    "isBlocked": false,
+    "isActivated": true,
+    "blockNote": "",
+    "referralCode": "IEZ8LC",
+    "isSkippedReferral": true,
+    "copyTradeQuota": 3,
+    "plan": 0,
+    "referralTier": "TIER_1",
+    "totalFeeLast30Days": 0,
+    "createdAt": "2023-11-06T02:05:04.079Z"
+}
+```

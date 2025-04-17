@@ -1,0 +1,95 @@
+---
+title: "Verify Login"
+api: "POST https://api.copin.io/auth/web3/verify-login"
+description: "Verify Web3 authentication and complete login process"
+---
+
+## Request Body
+
+<ParamField body="address" type="string" required>
+    The Ethereum wallet address of the user attempting to login
+</ParamField>
+
+<ParamField body="sign" type="string" required>
+    The signature created by signing the verification code with the user's private key. Message: `I want to login on Copin.io at ${time}. Login code: ${verifyCode}`
+</ParamField>
+
+<ParamField body="time" type="string" required>
+    Date-time  of the verification request
+</ParamField>
+
+<ParamField body="referralCode" type="string">
+    Optional referral code to apply to the user's account
+</ParamField>
+
+## Request Example
+
+```bash
+curl --request POST \
+--url "https://api.copin.io/auth/web3/verify-login" \
+--header 'Content-Type: application/json' \
+--data '{
+ "address": "0x1535484c1eec1d203fe1a53ea11a621a884ae067",
+ "sign": "0x5d99b6f7f6d1f73d1a26497f2b1c89b24c1adf257d861450123ae210f604e62c0fffffff886efdb0253cd39f9ecb4c49c9f5a4b95903cf564db34c79363e11ccf1b",
+ "time": "2025-04-14T09:55:27.767Z"
+}'
+```
+
+## Response
+<ResponseField name="id" type="string">
+  Unique identifier for the user
+</ResponseField>
+<ResponseField name="username" type="string">
+  User's wallet address used as username
+</ResponseField>
+<ResponseField name="role" type="string">
+  User's role in the system (e.g., "guest", "user", "admin")
+</ResponseField>
+<ResponseField name="isBlocked" type="boolean">
+  Indicates if the user account is blocked
+</ResponseField>
+<ResponseField name="isActivated" type="boolean">
+  Indicates if the user account is activated
+</ResponseField>
+<ResponseField name="blockNote" type="string">
+  Note about block reason if the account is blocked
+</ResponseField>
+<ResponseField name="referralCode" type="string">
+  User's referral code that can be shared with others
+</ResponseField>
+<ResponseField name="isSkippedReferral" type="boolean">
+  Indicates if the user skipped entering a referral code
+</ResponseField>
+<ResponseField name="copyTradeQuota" type="number">
+  Number of copy trades the user can create
+</ResponseField>
+<ResponseField name="plan" type="number">
+  User's subscription plan level
+</ResponseField>
+<ResponseField name="createdAt" type="string">
+  Timestamp when the user account was created
+</ResponseField>
+<ResponseField name="access_token" type="string">
+  JWT token to be used for authenticated API calls
+</ResponseField>
+<ResponseField name="isAddedReferral" type="boolean">
+  Indicates if the user has added a referral code
+</ResponseField>
+
+```json
+{
+    "id": "654849d04857e1f744646cdd",
+    "username": "0x1535484c1eec1d203fe1a53ea11a621a884ae067",
+    "role": "guest",
+    "isBlocked": false,
+    "isActivated": true,
+    "blockNote": "",
+    "referralCode": "IEZ8LC",
+    "isSkippedReferral": true,
+    "copyTradeQuota": 3,
+    "plan": 0,
+    "createdAt": "2023-11-06T02:05:04.079Z",
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjB4MTk2YWUxNkE5Mzg3YTNEYzVEZTgxMTQ2N0EyRTM3RDdGZUJlRDMwNCIsInRpbWUiOjE3NDQ2MjQwNjQyMTgsImFjY2VzcyI6IllrN1NjY0FrQ0MxNzQ0NjI0MDY0MjE4IiwiaWF0IjoxNzQ0NjI0MDY0LCJleHAiOjE3NDUyMjg4NjR9.09g22yhvApz64IPw3mGY0qsLLZqzeGUrKhcC27saLtr",
+    "isAddedReferral": false
+}
+```

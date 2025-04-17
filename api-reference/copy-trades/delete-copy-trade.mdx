@@ -1,0 +1,31 @@
+---
+title: "Delete Copy Trade"
+api: "DELETE https://api.copin.io/copy-trades/{id}"
+description: "Delete copy trade configuration"
+---
+
+## Authentication
+This endpoint requires authentication using a JWT token in the Authorization header.
+
+<ParamField header="Authorization" type="string" required>
+    JWT token in the format: `Authorization {token}`
+</ParamField>
+
+## Request
+
+<ParamField path="id" type="string" required>
+    The unique identifier of the copy trade
+</ParamField>
+
+## Request Example
+
+```bash
+curl --request DELETE \
+--url "https://api.copin.io/copy-trades/67fe13a16c6729db9c4b8f3c" \
+--header 'Content-Type: application/json' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjB4MTUzNTQ4NGMxRWVjMUQyMDNmRTFBNTNFQTExYTYyMWE4ODRBRTA2NyIsInRpbWUiOjE3NDQ2MjYxNjIzODksImFjY2VzcyI6IlVmTkNiTWhMVVMxNzQ0NjI2MTYyMzkwIiwiaWF0IjoxNzQ0NjI2MTYyLCJleHAiOjE3NDUyMzA5NjJ9.LpvhBdxyfehzom-v5tKumAqCptSMkVk7HVKKVtjSpk8'
+```
+
+## Response
+
+200 - OK

@@ -1,0 +1,322 @@
+---
+title: "Position Statistic List"
+api: "POST https://api.copin.io/{protocol}/position/statistic/filter"
+description: "Retrieve position statistics for a specific protocol"
+---
+
+## Authentication
+This endpoint requires authentication using a JWT token in the Authorization header.
+
+<ParamField header="Authorization" type="string" required>
+    JWT token in the format: `Authorization {token}`
+</ParamField>
+
+## Path Parameters
+
+<ParamField path="protocol" type="string" required>
+  The protocol to get positions for. Supported values include: `GMX`, `KWENTA`,
+  `POLYNOMIAL`, `POLYNOMIAL_L2`, `GMX_V2_AVAX`, `GMX_V2`, `GNS`, `GNS_POLY`,
+  `GNS_BASE`, `GNS_APE`, `LEVEL_BNB`, `LEVEL_ARB`, `MUX_ARB`, `APOLLOX_BNB`,
+  `AVANTIS_BASE`, `EQUATION_ARB`, `LOGX_BLAST`, `LOGX_MODE`, `MYX_ARB`,
+  `DEXTORO`, `VELA_ARB`, `HMX_ARB`, `SYNTHETIX_V3`, `SYNTHETIX_V3_ARB`,
+  `KTX_MANTLE`, `CYBERDEX`, `YFX_ARB`, `KILOEX_OPBNB`, `KILOEX_BNB`,
+  `KILOEX_MANTA`, `KILOEX_BASE`, `ROLLIE_SCROLL`, `MUMMY_FANTOM`, `HYPERLIQUID`,
+  `SYNFUTURE_BASE`, `MORPHEX_FANTOM`, `PERENNIAL_ARB`, `BSX_BASE`, `DYDX`,
+  `UNIDEX_ARB`, `VERTEX_ARB`, `HORIZON_BNB`, `HOLDSTATION_ZKSYNC`, `ZENO_METIS`,
+  `LINEHUB_LINEA`, `BMX_BASE`, `FOXIFY_ARB`, `APOLLOX_BASE`, `GMX_AVAX`,
+  `SYNTHETIX`, `DEPERP_BASE`, `ELFI_ARB`
+</ParamField>
+
+## Request Body
+
+<ParamField body="pagination" type="object">
+  Pagination parameters
+  <Expandable title="properties">
+    <ParamField body="limit" type="number" default="20">
+      Number of records to return
+    </ParamField>
+    <ParamField body="offset" type="number" default="0">
+      Number of records to skip
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="sortBy" type="string">
+  Field to sort by. Values: `avgVolume`, `roi`, `realisedRoi`, `pnl`, `realisedPnl` ...
+</ParamField>
+
+<ParamField body="sortType" type="string" default="desc">
+  Sort direction. Values: `desc`, `asc`
+</ParamField>
+
+<ParamField body="queries" type="array">
+  Array of query objects
+  <Expandable title="properties">
+    <ParamField body="fieldName" type="string">
+      Field name to query. Values: `type`
+    </ParamField>
+    <ParamField body="value" type="string">
+      Value for the field. For type: `D15`, `D30` ,...
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+## Request Example
+
+```bash
+curl --request POST \
+--url "https://api.copin.io/GNS/position/statistic/filter" \
+--header 'Content-Type: application/json' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjB4MTUzNTQ4NGMxRWVjMUQyMDNmRTFBNTNFQTExYTYyMWE4ODRBRTA2NyIsInRpbWUiOjE3NDQ2MjYxNjIzODksImFjY2VzcyI6IlVmTkNiTWhMVVMxNzQ0NjI2MTYyMzkwIiwiaWF0IjoxNzQ0NjI2MTYyLCJleHAiOjE3NDUyMzA5NjJ9.LpvhBdxyfehzom-v5tKumAqCptSMkVk7HVKKVtjSpk8' \
+--data '{
+  "pagination": {
+    "limit": 20,
+    "offset": 0
+  },
+  "queries": [
+    {
+      "fieldName": "type",
+      "value": "D15"
+    }
+  ],
+  "sortBy": "pnl",
+  "sortType": "desc"
+}'
+```
+## Response
+The response includes a data array containing position statistic objects and a meta object with pagination information.
+
+<ResponseField name="data" type="array">
+    Array of position statistic objects
+    <Expandable title="properties">
+        <ResponseField name="id" type="string">
+            Unique identifier for the position statistic
+        </ResponseField>
+        <ResponseField name="account" type="string">
+            The trader's address
+        </ResponseField>
+        <ResponseField name="totalTrade" type="number">
+            Total number of trades
+        </ResponseField>
+        <ResponseField name="totalWin" type="number">
+            Total number of winning trades
+        </ResponseField>
+        <ResponseField name="totalLose" type="number">
+            Total number of losing trades
+        </ResponseField>
+        <ResponseField name="totalGain" type="number">
+            Total gain amount from all trades
+        </ResponseField>
+        <ResponseField name="realisedTotalGain" type="number">
+            Realised total gain from closed positions
+        </ResponseField>
+        <ResponseField name="totalLoss" type="number">
+            Total loss amount from all trades
+        </ResponseField>
+        <ResponseField name="realisedTotalLoss" type="number">
+            Realised total loss from closed positions
+        </ResponseField>
+        <ResponseField name="totalVolume" type="number">
+            Total trading volume
+        </ResponseField>
+        <ResponseField name="avgVolume" type="number">
+            Average volume per trade
+        </ResponseField>
+        <ResponseField name="avgRoi" type="number">
+            Average ROI (Return on Investment) across all trades
+        </ResponseField>
+        <ResponseField name="realisedAvgRoi" type="number">
+            Realised average ROI from closed positions
+        </ResponseField>
+        <ResponseField name="maxRoi" type="number">
+            Maximum ROI achieved in a single trade
+        </ResponseField>
+        <ResponseField name="realisedMaxRoi" type="number">
+            Realised maximum ROI from closed positions
+        </ResponseField>
+        <ResponseField name="pnl" type="number">
+            Total profit and loss
+        </ResponseField>
+        <ResponseField name="realisedPnl" type="number">
+            Realised profit and loss from closed positions
+        </ResponseField>
+        <ResponseField name="maxPnl" type="number">
+            Maximum profit and loss achieved
+        </ResponseField>
+        <ResponseField name="realisedMaxPnl" type="number">
+            Realised maximum profit and loss from closed positions
+        </ResponseField>
+        <ResponseField name="realisedMaxDrawdown" type="number">
+            Maximum drawdown from realised positions
+        </ResponseField>
+        <ResponseField name="realisedMaxDrawdownPnl" type="number">
+            Maximum drawdown amount from realised positions
+        </ResponseField>
+        <ResponseField name="winRate" type="number">
+            Percentage of winning trades
+        </ResponseField>
+        <ResponseField name="profitRate" type="number">
+            Percentage of profitable trades
+        </ResponseField>
+        <ResponseField name="realisedProfitRate" type="number">
+            Percentage of profitable closed positions
+        </ResponseField>
+        <ResponseField name="orderPositionRatio" type="number">
+            Ratio of orders to positions
+        </ResponseField>
+        <ResponseField name="profitLossRatio" type="number">
+            Ratio of profit to loss
+        </ResponseField>
+        <ResponseField name="realisedProfitLossRatio" type="number">
+            Ratio of realised profit to realised loss
+        </ResponseField>
+        <ResponseField name="longRate" type="number">
+            Percentage of long positions
+        </ResponseField>
+        <ResponseField name="gainLossRatio" type="number">
+            Ratio of gains to losses
+        </ResponseField>
+        <ResponseField name="realisedGainLossRatio" type="number">
+            Ratio of realised gains to realised losses
+        </ResponseField>
+        <ResponseField name="avgDuration" type="number">
+            Average duration of positions in hours
+        </ResponseField>
+        <ResponseField name="minDuration" type="number">
+            Minimum duration of any position in hours
+        </ResponseField>
+        <ResponseField name="maxDuration" type="number">
+            Maximum duration of any position in hours
+        </ResponseField>
+        <ResponseField name="avgLeverage" type="number">
+            Average leverage used across all positions
+        </ResponseField>
+        <ResponseField name="minLeverage" type="number">
+            Minimum leverage used in any position
+        </ResponseField>
+        <ResponseField name="maxLeverage" type="number">
+            Maximum leverage used in any position
+        </ResponseField>
+        <ResponseField name="totalLiquidation" type="number">
+            Total number of liquidated positions
+        </ResponseField>
+        <ResponseField name="totalLiquidationAmount" type="number">
+            Total amount lost due to liquidations
+        </ResponseField>
+        <ResponseField name="runTimeDays" type="number">
+            Number of days the trader has been active
+        </ResponseField>
+        <ResponseField name="lastTradeAtTs" type="number">
+            Timestamp of the last trade (milliseconds)
+        </ResponseField>
+        <ResponseField name="totalFee" type="number">
+            Total fees paid across all trades
+        </ResponseField>
+        <ResponseField name="type" type="string">
+            Time period for this statistic (e.g., "D15", "D30")
+        </ResponseField>
+        <ResponseField name="statisticAt" type="string">
+            Timestamp when these statistics were calculated
+        </ResponseField>
+        <ResponseField name="lastTradeAt" type="string">
+            Timestamp of the last trade (ISO format)
+        </ResponseField>
+        <ResponseField name="indexTokens" type="array">
+            List of token identifiers traded
+        </ResponseField>
+        <ResponseField name="protocol" type="string">
+            Protocol identifier
+        </ResponseField>
+        <ResponseField name="createdAt" type="string">
+            Timestamp when this statistic record was created
+        </ResponseField>
+        <ResponseField name="isOpenPosition" type="boolean">
+            Whether the trader has any open positions
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+
+<ResponseField name="meta" type="object">
+    Metadata about the response
+    <Expandable title="properties">
+        <ResponseField name="limit" type="number">
+            Number of records returned
+        </ResponseField>
+        <ResponseField name="offset" type="number">
+            Number of records skipped
+        </ResponseField>
+        <ResponseField name="total" type="number">
+            Total number of records matching the query
+        </ResponseField>
+        <ResponseField name="totalPages" type="number">
+            Total number of pages
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+
+## Response Example
+
+```json
+{
+  "data": [
+    {
+      "id": "67fdbfa13219b4577b6973cb",
+      "account": "0xF13304d2a5A74E8d6f87272503Fbac130B3bb2B0",
+      "totalTrade": 1,
+      "totalWin": 0,
+      "totalLose": 1,
+      "totalGain": 0,
+      "realisedTotalGain": 0,
+      "totalLoss": -8.781451873656628,
+      "realisedTotalLoss": -2.4097624076006596,
+      "totalVolume": 5079.55940610314,
+      "avgVolume": 5079.55940610314,
+      "avgRoi": -23.94,
+      "realisedAvgRoi": -6.57,
+      "maxRoi": -23.94,
+      "realisedMaxRoi": -6.57,
+      "pnl": -8.781451873656628,
+      "realisedPnl": -2.4097624076006596,
+      "maxPnl": -8.781451873656628,
+      "realisedMaxPnl": -2.4097624076006596,
+      "realisedMaxDrawdown": -6.57,
+      "realisedMaxDrawdownPnl": -2.4097624076006596,
+      "winRate": 0,
+      "profitRate": 0,
+      "realisedProfitRate": 0,
+      "orderPositionRatio": 2,
+      "profitLossRatio": 0,
+      "realisedProfitLossRatio": 0,
+      "longRate": 100,
+      "gainLossRatio": 0,
+      "realisedGainLossRatio": 0,
+      "avgDuration": 20,
+      "minDuration": 20,
+      "maxDuration": 20,
+      "avgLeverage": 138.5,
+      "minLeverage": 138.5,
+      "maxLeverage": 138.5,
+      "totalLiquidation": 0,
+      "totalLiquidationAmount": 0,
+      "runTimeDays": 1,
+      "lastTradeAtTs": 1744602207000,
+      "totalFee": 6.371689466055969,
+      "type": "D15",
+      "statisticAt": "2025-04-15T02:08:33.740Z",
+      "lastTradeAt": "2025-04-14T03:43:27.000Z",
+      "indexTokens": [
+        "GNS-191"
+      ],
+      "protocol": "GNS",
+      "createdAt": "2025-04-15T02:08:33.755Z",
+      "isOpenPosition": false
+    }
+  ],
+  "meta": {
+    "limit": 20,
+    "offset": 0,
+    "total": 56,
+    "totalPages": 3
+  }
+}
+```

@@ -1,0 +1,111 @@
+---
+title: "Withdraw"
+api: "POST https://api.copin.io/embedded-wallets/hyperliquid/withdraw"
+description: "Withdraw for copin lite"
+---
+
+## Request Body
+
+<ParamField body="sourceAddress" type="string" required>
+    Address of the source wallet (embedded wallet)
+</ParamField>
+
+<ParamField body="destinationAddress" type="string" required>
+    Address of the destination wallet to withdraw funds to
+</ParamField>
+
+<ParamField body="amount" type="number" required>
+    Amount to withdraw
+</ParamField>
+
+## Request Example
+
+```bash
+curl --request POST \
+--url "https://api.copin.io/embedded-wallets/hyperliquid/withdraw" \
+--header 'Content-Type: application/json' \
+--data '{
+  "sourceAddress":"0x06791c29FaEDb81A87A2Ef85ce2A986fE6dDF96e",
+  "destinationAddress": "0x1535484c1Eec1D203fE1A53EA11a621a884AE067",
+  "amount": 10
+}'
+```
+## Response
+The API returns withdrawal transaction details and status information.
+
+<ResponseField name="userId" type="string">
+    Identifier of the user who initiated the withdrawal
+</ResponseField>
+<ResponseField name="embeddedWallet" type="string">
+    Address of the embedded wallet
+</ResponseField>
+<ResponseField name="data" type="object">
+    Withdrawal transaction details
+</ResponseField>
+<ResponseField name="data.destinationAddress" type="string">
+    Address where funds are being sent
+</ResponseField>
+<ResponseField name="data.chargeFeeTime" type="string">
+    Timestamp when fees were charged
+</ResponseField>
+<ResponseField name="data.chargeFeeTxHash" type="string">
+    Transaction hash for the fee charge
+</ResponseField>
+<ResponseField name="data.withdrawTime" type="string">
+    Timestamp when the withdrawal was initiated
+</ResponseField>
+<ResponseField name="data.txHash" type="string">
+    Transaction hash for the withdrawal
+</ResponseField>
+<ResponseField name="data.amount" type="number">
+    Total amount requested for withdrawal
+</ResponseField>
+<ResponseField name="data.feeAmount" type="number">
+    Total fee amount
+</ResponseField>
+<ResponseField name="data.hyperliquidWithdrawFeeAmount" type="number">
+    Withdrawal fee charged by HyperLiquid
+</ResponseField>
+<ResponseField name="data.hyperliquidTransferFeeAmount" type="number">
+    Transfer fee charged by HyperLiquid
+</ResponseField>
+<ResponseField name="data.withdrawAmount" type="number">
+    Amount being withdrawn
+</ResponseField>
+<ResponseField name="data.receiveAmount" type="number">
+    Amount that will be received after fees
+</ResponseField>
+<ResponseField name="type" type="string">
+    Type of transaction (e.g., "WITHDRAW")
+</ResponseField>
+<ResponseField name="status" type="string">
+    Current status of the withdrawal (e.g., "SUCCESSFUL")
+</ResponseField>
+<ResponseField name="createdAt" type="string">
+    Timestamp when the withdrawal request was created
+</ResponseField>
+
+## Response Example
+
+```json
+{
+  "userId": "654849d04857e1f744646cdd",
+  "embeddedWallet": "0x06791c29FaEDb81A87A2Ef85ce2A986fE6dDF96e",
+  "data": {
+    "destinationAddress": "0x1535484c1Eec1D203fE1A53EA11a621a884AE067",
+    "chargeFeeTime": "2025-04-15T08:06:57.341Z",
+    "chargeFeeTxHash": "0x378fac4292a2145778ef0419d8fec0019100d73af2bf21ecacb4bc260b5b28c8",
+    "withdrawTime": "2025-04-15T08:06:57.341Z",
+    "txHash": "0x1988529b8b136229881b543373725e22b154b09471cf8c23b76d8f1b134bcf22",
+    "amount": 10,
+    "feeAmount": 1.1,
+    "hyperliquidWithdrawFeeAmount": 1,
+    "hyperliquidTransferFeeAmount": 1,
+    "withdrawAmount": 7.9,
+    "receiveAmount": 6.9
+  },
+  "type": "WITHDRAW",
+  "status": "SUCCESSFUL",
+  "createdAt": "2025-04-15T08:06:57.341Z"
+}
+```
