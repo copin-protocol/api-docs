@@ -68,7 +68,8 @@
       "group": "Position Statistics",
       "pages": [
         "api-reference/position-statistics/details-by-account",
-        "api-reference/position-statistics/list"
+        "api-reference/position-statistics/list",
+        "api-reference/position-statistics/list-by-api-key"
       ]
     },
     {
