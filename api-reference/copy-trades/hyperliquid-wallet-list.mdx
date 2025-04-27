@@ -1,0 +1,87 @@
+---
+title: "Hyperliquid Wallet List"
+api: "GET https://api.copin.io/copy-wallets/hyperliquid-embedded/list"
+description: "Retrieve a list of all hyperliquid wallets associated with the authenticated user"
+---
+
+## Authentication
+This endpoint requires authentication using a JWT token in the Authorization header.
+
+<ParamField header="Authorization" type="string" required>
+    JWT token in the format: `Authorization {token}`
+</ParamField>
+
+## Request Example
+
+```bash
+curl --request GET \
+--url "https://api.copin.io/copy-wallets/hyperliquid-embedded/list" \
+--header 'Content-Type: application/json' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjB4MTUzNTQ4NGMxRWVjMUQyMDNmRTFBNTNFQTExYTYyMWE4ODRBRTA2NyIsInRpbWUiOjE3NDQ2MjYxNjIzODksImFjY2VzcyI6IlVmTkNiTWhMVVMxNzQ0NjI2MTYyMzkwIiwiaWF0IjoxNzQ0NjI2MTYyLCJleHAiOjE3NDUyMzA5NjJ9.LpvhBdxyfehzom-v5tKumAqCptSMkVk7HVKKVtjSpk8'
+```
+## Response
+The API returns an array of copy trade wallet objects, each containing details about a single copy trade wallet.
+
+<ResponseField name="data" type="array">
+    Array of copy wallet objects
+    <Expandable title="properties">
+        <ResponseField name="id" type="string">
+            Unique identifier for the copy trade wallet
+        </ResponseField>
+        <ResponseField name="userId" type="string">
+            Identifier of the user who owns this wallet
+        </ResponseField>
+        <ResponseField name="name" type="string">
+            Display name of the copy trade wallet
+        </ResponseField>
+        <ResponseField name="exchange" type="string">
+            The exchange platform this wallet is connected to
+        </ResponseField>
+        <ResponseField name="hyperliquid" type="object">
+            Details specific to HyperLiquid wallets
+        </ResponseField>
+        <ResponseField name="hyperliquid.apiKey" type="string">
+            API key for the HyperLiquid wallet
+        </ResponseField>
+        <ResponseField name="hyperliquid.embeddedWallet" type="string">
+            Wallet address for embedded wallets
+        </ResponseField>
+        <ResponseField name="hyperliquid.isEmbedded" type="boolean">
+            Indicates if this is an embedded wallet
+        </ResponseField>
+        <ResponseField name="hyperliquid.verified" type="boolean">
+            Indicates if the wallet has been verified
+        </ResponseField>
+        <ResponseField name="balance" type="number">
+            Total balance in the wallet
+        </ResponseField>
+        <ResponseField name="availableBalance" type="number">
+            Available balance that can be used for trading
+        </ResponseField>
+        <ResponseField name="createdAt" type="string">
+            Timestamp when the wallet was created
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+
+## Response Example
+
+```json
+[
+  {
+    "id": "6780e1a8cf5b4c9659f7a4cb",
+    "userId": "654849d04857e1f744646cdd",
+    "name": "Default 0x067",
+    "exchange": "HYPERLIQUID",
+    "hyperliquid": {
+      "apiKey": "0x06791c29FaEDb81A87A2Ef85ce2A986fE6dDF96e",
+      "embeddedWallet": "0x06791c29FaEDb81A87A2Ef85ce2A986fE6dDF96e",
+      "isEmbedded": true,
+       "verified": false
+    },
+    "balance": 0,
+    "availableBalance": 0,
+    "createdAt": "2025-01-10T09:00:24.378Z"
+  }
+]
+```

@@ -61,7 +61,8 @@
         "api-reference/copy-trades/update-copy-trade",
         "api-reference/copy-trades/pre-delete-copy-trade",
         "api-reference/copy-trades/delete-copy-trade",
-        "api-reference/copy-trades/activity-log"
+        "api-reference/copy-trades/activity-log",
+        "api-reference/copy-trades/hyperliquid-wallet-list"
       ]
     },
     {
