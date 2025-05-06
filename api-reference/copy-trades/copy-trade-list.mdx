@@ -11,13 +11,20 @@ This endpoint requires authentication using a JWT token in the Authorization hea
     JWT token in the format: `Authorization {token}`
 </ParamField>
 
+<ParamField body="ids" type="string[]">
+    Optional array of copy trade IDs to filter results
+</ParamField>
+
 ## Request Example
 
 ```bash
 curl --request POST \
---url "https://api.copin.io/copy-trades/list" \a
+--url "https://api.copin.io/copy-trades/list" \
 --header 'Content-Type: application/json' \
 --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjB4MTUzNTQ4NGMxRWVjMUQyMDNmRTFBNTNFQTExYTYyMWE4ODRBRTA2NyIsInRpbWUiOjE3NDQ2MjYxNjIzODksImFjY2VzcyI6IlVmTkNiTWhMVVMxNzQ0NjI2MTYyMzkwIiwiaWF0IjoxNzQ0NjI2MTYyLCJleHAiOjE3NDUyMzA5NjJ9.LpvhBdxyfehzom-v5tKumAqCptSMkVk7HVKKVtjSpk8'
+--data '{
+  "ids": ["67cd2e99b302b7331a29173a"],
+}'
 ```
 
 ## Response
