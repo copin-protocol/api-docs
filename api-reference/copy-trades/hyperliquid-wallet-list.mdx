@@ -61,6 +61,12 @@ The API returns an array of copy trade wallet objects, each containing details a
         <ResponseField name="createdAt" type="string">
             Timestamp when the wallet was created
         </ResponseField>
+        <ResponseField name="pnl24h" type="number">
+            Pnl during 24h
+        </ResponseField>
+        <ResponseField name="totalPnl" type="number">
+            Total pnl
+        </ResponseField>
     </Expandable>
 </ResponseField>
 
@@ -81,6 +87,8 @@ The API returns an array of copy trade wallet objects, each containing details a
     },
     "balance": 0,
     "availableBalance": 0,
+    "pnl24h": 10,
+    "totalPnl": 200,
     "createdAt": "2025-01-10T09:00:24.378Z"
   }
 ]
