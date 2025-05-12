@@ -1,0 +1,208 @@
+---
+title: "PnL Statistic"
+api: "POST https://api.copin.io/public/position/statistic/pnl-statistics"
+description: "Retrieve pnl position statistics"
+---
+
+## Authentication
+This endpoint requires authentication using a JWT token in the Authorization header.
+
+<ParamField header="Authorization" type="string" required>
+    JWT token in the format: `Authorization {token}`
+</ParamField>
+
+## Request Body
+
+<ParamField body="accounts" type="array" required>
+   Accounts list for filter
+    <Expandable title="properties">
+        <ParamField body="account" type="string">
+            Account for filter
+        </ParamField>
+        <ParamField body="protocol" type="string">
+            Protocol for filter (KILOEX_BASE, GMX, GNS...)
+        </ParamField>
+    </Expandable>
+</ParamField>
+<ParamField body="statisticType" type="string">
+    Statistic for different time periods (FULL, D60, D30, D15, D7).
+</ParamField>
+
+## Request Example
+
+```bash
+curl --request POST \
+--url "https://api.copin.io/public/position/statistic/pnl-statistics" \
+--header 'Content-Type: application/json' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjB4MTUzNTQ4NGMxRWVjMUQyMDNmRTFBNTNFQTExYTYyMWE4ODRBRTA2NyIsInRpbWUiOjE3NDQ2MjYxNjIzODksImFjY2VzcyI6IlVmTkNiTWhMVVMxNzQ0NjI2MTYyMzkwIiwiaWF0IjoxNzQ0NjI2MTYyLCJleHAiOjE3NDUyMzA5NjJ9.LpvhBdxyfehzom-v5tKumAqCptSMkVk7HVKKVtjSpk8' \
+--data '{
+  "accounts": [
+    {
+      "account": "0xd649A0876453Fc7626569B28E364262192874E18",
+      "protocol": "KILOEX_BASE"
+    }
+  ],
+  "statisticType": "D15"
+}'
+```
+## Response
+
+The response is structured as an object where each key is an account address from your request. For each account, the API returns time series data containing dates and corresponding trading metrics.
+<ResponseField name="{account_address}" type="object">
+    Data for each requested account, keyed by account address
+    <Expandable title="properties">
+        <ResponseField name="date" type="array">
+            Array of dates for the time series in ISO format
+        </ResponseField>
+        <ResponseField name="realisedPnl" type="array">
+            Array of realised profit and loss values corresponding to each date
+        </ResponseField>
+        <ResponseField name="unrealisedPnl" type="array">
+            Array of unrealised profit and loss values corresponding to each date
+        </ResponseField>
+        <ResponseField name="fee" type="array">
+            Array of trading fee values corresponding to each date
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+
+## Response Example
+
+```json
+{
+  "0xd649A0876453Fc7626569B28E364262192874E18": {
+    "date": [
+      "2025-04-12T00:00:00.000Z",
+      "2025-04-13T00:00:00.000Z",
+      "2025-04-14T00:00:00.000Z",
+      "2025-04-15T00:00:00.000Z",
+      "2025-04-16T00:00:00.000Z",
+      "2025-04-17T00:00:00.000Z",
+      "2025-04-18T00:00:00.000Z",
+      "2025-04-19T00:00:00.000Z",
+      "2025-04-20T00:00:00.000Z",
+      "2025-04-21T00:00:00.000Z",
+      "2025-04-22T00:00:00.000Z",
+      "2025-04-23T00:00:00.000Z",
+      "2025-04-24T00:00:00.000Z",
+      "2025-04-25T00:00:00.000Z",
+      "2025-04-26T00:00:00.000Z",
+      "2025-04-27T00:00:00.000Z",
+      "2025-04-28T00:00:00.000Z",
+      "2025-04-29T00:00:00.000Z",
+      "2025-04-30T00:00:00.000Z",
+      "2025-05-01T00:00:00.000Z",
+      "2025-05-02T00:00:00.000Z",
+      "2025-05-03T00:00:00.000Z",
+      "2025-05-04T00:00:00.000Z",
+      "2025-05-05T00:00:00.000Z",
+      "2025-05-06T00:00:00.000Z",
+      "2025-05-07T00:00:00.000Z",
+      "2025-05-08T00:00:00.000Z",
+      "2025-05-09T00:00:00.000Z",
+      "2025-05-10T00:00:00.000Z",
+      "2025-05-11T00:00:00.000Z",
+      "2025-05-12T00:00:00.000Z"
+    ],
+    "realisedPnl": [
+      0,
+      0,
+      3323232.953125,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "unrealisedPnl": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "fee": [
+      0,
+      0,
+      47.00442682206631,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}
+```

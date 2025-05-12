@@ -1,0 +1,60 @@
+---
+title: "Get all tokens"
+api: "GET https://api.copin.io/pairs/tokens"
+description: "Retrieve tokens of all protocols"
+---
+## Request Example
+
+```bash
+curl --request GET \
+--url "https://api.copin.io/pairs/tokens" \
+--header 'Content-Type: application/json' \
+```
+## Response
+The API returns a comprehensive list of tokens organized by protocol. For each protocol, an array of token objects is provided containing symbol information and associated blockchain details.
+<ResponseField name="data" type="object">
+    Container for token data grouped by protocol
+    <Expandable title="properties">
+        <ResponseField name="{protocol_name}" type="array">
+            Array of token objects for each protocol (e.g., "APOLLOX_BASE")
+            <Expandable title="properties">
+                <ResponseField name="symbol" type="string">
+                    Trading symbol of the token (e.g., "ETH", "BTC")
+                </ResponseField>
+                <ResponseField name="indexTokens" type="array">
+                    Array of contract addresses associated with this token on the protocol
+                </ResponseField>
+                <ResponseField name="isForex" type="boolean">
+                    Indicates whether the token is a forex-based trading pair
+                </ResponseField>
+            </Expandable>
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+
+## Response Example
+
+```json
+{
+  "data": {
+    "APOLLOX_BASE": [
+      {
+        "symbol": "ETH",
+        "indexTokens": [
+          "0x4200000000000000000000000000000000000006",
+          "0x5A5454A6030FB50ceb3eb78977D140198A27be5e"
+        ],
+        "isForex": false
+      },
+      {
+        "symbol": "BTC",
+        "indexTokens": [
+          "0xBc76B3FD0D18C7496C0B04aeA0Fe7C3Ed0e4d9C9",
+          "0x236aa50979D5f3De3Bd1Eeb40E81137F22ab794b"
+        ],
+        "isForex": false
+      }
+    ]
+  }
+}
+```

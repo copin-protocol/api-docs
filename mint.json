@@ -62,7 +62,8 @@
         "api-reference/copy-trades/pre-delete-copy-trade",
         "api-reference/copy-trades/delete-copy-trade",
         "api-reference/copy-trades/activity-log",
-        "api-reference/copy-trades/hyperliquid-wallet-list"
+        "api-reference/copy-trades/hyperliquid-wallet-list",
+        "api-reference/copy-trades/get-all-tokens"
       ]
     },
     {
@@ -70,7 +71,9 @@
       "pages": [
         "api-reference/position-statistics/details-by-account",
         "api-reference/position-statistics/list",
-        "api-reference/position-statistics/list-by-api-key"
+        "api-reference/position-statistics/list-by-api-key",
+        "api-reference/position-statistics/list-by-graphql",
+        "api-reference/position-statistics/pnl-statistic"
       ]
     },
     {
