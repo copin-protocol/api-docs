@@ -1,0 +1,166 @@
+---
+title: "Deposit and Withdraw Histories"
+api: "GET https://api.copin.io/embedded-wallets/hyperliquid/transactions/page"
+description: "Deposit and Withdraw histories for copin lite"
+---
+
+## Authentication
+This endpoint requires authentication using a JWT token in the Authorization header.
+
+<ParamField header="Authorization" type="string" required>
+    JWT token in the format: `Authorization {token}`
+</ParamField>
+
+## Request Query
+
+<ParamField path="limit" type="number">
+    Limit per page
+</ParamField>
+
+<ParamField path="offset" type="number">
+    Skip records
+</ParamField>
+
+## Request Example
+
+```bash
+curl --request GET \
+--url "curl 'https://api.copin.io/embedded-wallets/hyperliquid/transactions/page?limit=20&offset=0' \
+  -H 'Access-Control-Max-Age: 600' \
+  -H 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjB4MTUzNTQ4NGMxRWVjMUQyMDNmRTFBNTNFQTExYTYyMWE4ODRBRTA2NyIsInRpbWUiOjE3NDczNzg1MjI4MzMsImFjY2VzcyI6IlY2bUFWQ1RGUUgxNzQ3Mzc4NTIyODMzIiwiaWF0IjoxNzQ3Mzc4NTIyLCJleHAiOjE3NDc5ODMzMjJ9.ENFQvMuqWdl5E6iQTT0jVWd5nYbaG0IfjpYCIvmY1NA'
+'
+```
+## Response
+
+The API returns a paginated list of deposit and withdrawal transactions.
+<ResponseField name="data" type="array">
+    Array of transaction objects
+</ResponseField>
+<ResponseField name="data[].embeddedWallet" type="string">
+    Address of the embedded wallet
+</ResponseField>
+<ResponseField name="data[].estimatedFinishTime" type="string">
+    Estimated timestamp when the transaction will be completed
+</ResponseField>
+<ResponseField name="data[].type" type="string">
+    Type of transaction: "DEPOSIT" or "WITHDRAW"
+</ResponseField>
+<ResponseField name="data[].status" type="string">
+    Current status of the transaction: "PENDING", "SUCCESSFUL", or "FAILED"
+</ResponseField>
+<ResponseField name="data[].createdAt" type="string">
+    Timestamp when the transaction was created
+</ResponseField>
+<ResponseField name="data[].data" type="object">
+    Transaction details (varies based on transaction type)
+</ResponseField>
+Withdraw Transaction Data Fields
+<ResponseField name="data[].data.destinationAddress" type="string">
+    Address where funds were sent (for WITHDRAW transactions)
+</ResponseField>
+<ResponseField name="data[].data.amount" type="number">
+    Total amount of the withdrawal request
+</ResponseField>
+<ResponseField name="data[].data.feeAmount" type="number">
+    Total fee amount charged for the withdrawal
+</ResponseField>
+<ResponseField name="data[].data.hyperliquidWithdrawFeeAmount" type="number">
+    Withdrawal fee charged by HyperLiquid
+</ResponseField>
+<ResponseField name="data[].data.hyperliquidTransferFeeAmount" type="number">
+    Transfer fee charged by HyperLiquid
+</ResponseField>
+<ResponseField name="data[].data.withdrawAmount" type="number">
+    Amount being withdrawn after fees
+</ResponseField>
+<ResponseField name="data[].data.receiveAmount" type="number">
+    Final amount received after all fees
+</ResponseField>
+<ResponseField name="data[].data.withdrawTime" type="string">
+    Timestamp when the withdrawal was processed
+</ResponseField>
+<ResponseField name="data[].data.txHash" type="string">
+    Transaction hash for the withdrawal
+</ResponseField>
+<ResponseField name="data[].data.chargeFeeTime" type="string">
+    Timestamp when fees were charged
+</ResponseField>
+<ResponseField name="data[].data.chargeFeeTxHash" type="string">
+    Transaction hash for the fee charge
+</ResponseField>
+Deposit Transaction Data Fields
+<ResponseField name="data[].data.requestTxHash" type="string">
+    Transaction hash of the deposit request
+</ResponseField>
+<ResponseField name="data[].data.requestLogIndex" type="number">
+    Log index in the transaction
+</ResponseField>
+<ResponseField name="data[].data.requestTime" type="string">
+    Timestamp when the deposit request was made
+</ResponseField>
+<ResponseField name="data[].data.relayerAddress" type="string">
+    Address of the relayer that processed the deposit
+</ResponseField>
+<ResponseField name="data[].data.amountStr" type="string">
+    String representation of the deposit amount (in wei)
+</ResponseField>
+<ResponseField name="data[].data.amount" type="number">
+    Deposit amount in standard units
+</ResponseField>
+<ResponseField name="data[].data.permit" type="object">
+    Permit data used for the deposit
+</ResponseField>
+<ResponseField name="data[].data.permit.signature" type="string">
+    Cryptographic signature for the permit
+</ResponseField>
+<ResponseField name="data[].data.permit.deadline" type="number">
+    Timestamp deadline for the permit
+</ResponseField>
+
+## Response Example
+
+```json
+{
+  "data": [
+    {
+      "embeddedWallet": "0x26C50Fc2c03F7F6CF5B57CF8AE32C633D117FfAc",
+      "estimatedFinishTime": "2025-05-14T08:15:31.097Z",
+      "data": {
+        "destinationAddress": "0x3893209E93c68E7457ef722A4D974861F92859E8",
+        "amount": 19.71,
+        "feeAmount": 1,
+        "hyperliquidWithdrawFeeAmount": 1,
+        "hyperliquidTransferFeeAmount": 0,
+        "withdrawAmount": 18.7,
+        "receiveAmount": 17.7,
+        "withdrawTime": "2025-05-14T08:10:27.004Z",
+        "txHash": "0xe352543ca095db090d20c2410b42d8a9bd42b8aebe416246d03b85b0a27ce714",
+        "chargeFeeTime": "2025-05-14T08:19:00.235Z",
+        "chargeFeeTxHash": "0x6273d416b0fb3ce3a85604236da6d6020494007643fc73fcb1f93b87dc335741"
+      },
+      "type": "WITHDRAW",
+      "status": "SUCCESSFUL",
+      "createdAt": "2025-05-14T08:10:24.108Z"
+    },
+    {
+      "embeddedWallet": "0x26C50Fc2c03F7F6CF5B57CF8AE32C633D117FfAc",
+      "estimatedFinishTime": "2025-04-18T08:50:48.052Z",
+      "data": {
+        "requestTxHash": "0xab00db07ea1507e83b9ba55636cd2c0996a425768aa54f404defa7bb77b94993",
+        "requestLogIndex": 6,
+        "requestTime": "2025-04-18T08:49:44.000Z",
+        "relayerAddress": "0x3503D353211Fb7d2069bf521fb462944eeb6c2bb",
+        "amountStr": "20000000",
+        "amount": 20,
+        "permit": {
+          "signature": "0xde91563abb973f63cb17bca1d3d2beb7ec2faef8478509934680e8595a8444d95003089a5568a1b61476fcf37a887520662b50de9114a07a1a1934349a35ca181c",
+          "deadline": 1744973390
+        }
+      },
+      "type": "DEPOSIT",
+      "status": "SUCCESSFUL",
+      "createdAt": "2025-04-18T08:49:48.052Z"
+    }
+  ]
+}
+```
