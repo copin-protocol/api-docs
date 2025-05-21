@@ -4,6 +4,14 @@ api: "POST https://api.copin.io/{protocol}/position/filter"
 description: "Retrieve positions for a specific protocol"
 ---
 
+<ParamField header="Authorization" type="string">
+    JWT token in the format: `Authorization {token}`
+</ParamField>
+
+<ParamField header="x-api-key" type="string">
+    Token in the format: `x-api-key {api-key}`
+</ParamField>
+
 ## Path Parameters
 
 <ParamField path="protocol" type="string" required>

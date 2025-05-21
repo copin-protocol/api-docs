@@ -3,6 +3,13 @@ title: "Position By Tx Hash"
 api: "GET https://api.copin.io/{protocol}/position/{txHash}"
 description: "Retrieve details for a specific position"
 ---
+<ParamField header="Authorization" type="string">
+    JWT token in the format: `Authorization {token}`
+</ParamField>
+
+<ParamField header="x-api-key" type="string">
+    Token in the format: `x-api-key {api-key}`
+</ParamField>
 
 ## Path Parameters
 
