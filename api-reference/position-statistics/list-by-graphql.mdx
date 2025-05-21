@@ -11,22 +11,6 @@ This endpoint requires authentication using a JWT token in the Authorization hea
     JWT token in the format: `Authorization {token}`
 </ParamField>
 
-## Path Parameters
-
-<ParamField path="protocol" type="string" required>
-  The protocol to get positions for. Supported values include: `GMX`, `KWENTA`,
-  `POLYNOMIAL`, `POLYNOMIAL_L2`, `GMX_V2_AVAX`, `GMX_V2`, `GNS`, `GNS_POLY`,
-  `GNS_BASE`, `GNS_APE`, `LEVEL_BNB`, `LEVEL_ARB`, `MUX_ARB`, `APOLLOX_BNB`,
-  `AVANTIS_BASE`, `EQUATION_ARB`, `LOGX_BLAST`, `LOGX_MODE`, `MYX_ARB`,
-  `DEXTORO`, `VELA_ARB`, `HMX_ARB`, `SYNTHETIX_V3`, `SYNTHETIX_V3_ARB`,
-  `KTX_MANTLE`, `CYBERDEX`, `YFX_ARB`, `KILOEX_OPBNB`, `KILOEX_BNB`,
-  `KILOEX_MANTA`, `KILOEX_BASE`, `ROLLIE_SCROLL`, `MUMMY_FANTOM`, `HYPERLIQUID`,
-  `SYNFUTURE_BASE`, `MORPHEX_FANTOM`, `PERENNIAL_ARB`, `BSX_BASE`, `DYDX`,
-  `UNIDEX_ARB`, `VERTEX_ARB`, `HORIZON_BNB`, `HOLDSTATION_ZKSYNC`, `ZENO_METIS`,
-  `LINEHUB_LINEA`, `BMX_BASE`, `FOXIFY_ARB`, `APOLLOX_BASE`, `GMX_AVAX`,
-  `SYNTHETIX`, `DEPERP_BASE`, `ELFI_ARB`
-</ParamField>
-
 ## Authentication
 This endpoint requires authentication using a JWT token in the Authorization header.
 
@@ -83,37 +67,12 @@ This endpoint requires authentication using a JWT token in the Authorization hea
 ## Request Example
 
 ```bash
-curl --request POST \
---url "https://api.copin.io/graphql" \
---header 'Content-Type: application/json' \
---header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjB4MTk2YWUxNkE5Mzg3YTNEYzVEZTgxMTQ2N0EyRTM3RDdGZUJlRDMwNCIsInRpbWUiOjE3NDY0OTYxNDA2MDEsImFjY2VzcyI6InpwNVBXTWpVQ0cxNzQ2NDk2MTQwNjAxIiwiaWF0IjoxNzQ2NDk2MTQwLCJleHAiOjE3NDcxMDA5NDB9.vD5a90vP8FmzLqou_eZwopxpqKvflynhK_SpOhRSoss' \
---data '{
-  "operationName": "Search",
-  "variables": {
-    "index": "copin.position_statistics",
-    "body": {
-      "filter": {
-        "and": [
-          {"field": "totalTrade", "gte": "2"},
-          {"field": "profitRate", "gte": "60"},
-          {"field": "pnl", "gte": "100"},
-          {"field": "winRate", "gte": "51"},
-          {"field": "runTimeDays", "gte": "7"},
-          {"field": "protocol", "in": ["GNS"]},
-          {"field": "type", "match": "D30"}
-        ]
-      },
-      "sorts": [
-        {"field": "realisedPnl", "direction": "desc"}
-      ],
-      "paging": {
-        "size": 12,
-        "from": 0
-      }
-    }
-  },
-  "query": "query Search($index: String!, $body: SearchPayload!) {\\n  searchPositionStatistic(index: $index, body: $body) {\\n    data {\\n      id\\n      account\\n      protocol\\n      type\\n      maxDuration\\n      minDuration\\n      avgDuration\\n      realisedTotalGain\\n      totalLose\\n      totalLoss\\n      totalWin\\n      totalTrade\\n      totalLiquidation\\n      totalLiquidationAmount\\n      totalFee\\n      avgVolume\\n      totalVolume\\n      gainLossRatio\\n      orderPositionRatio\\n      profitLossRatio\\n      winRate\\n      longRate\\n      profitRate\\n      pnl\\n      unrealisedPnl\\n      avgRoi\\n      maxRoi\\n      maxPnl\\n      avgLeverage\\n      maxLeverage\\n      minLeverage\\n      runTimeDays\\n      indexTokens\\n      lastTradeAt\\n      lastTradeAtTs\\n      statisticAt\\n      createdAt\\n      updatedAt\\n      realisedTotalGain\\n      realisedTotalLoss\\n      realisedPnl\\n      realisedAvgRoi\\n      realisedMaxRoi\\n      realisedMaxPnl\\n      realisedMaxDrawdown\\n      realisedMaxDrawdownPnl\\n      realisedProfitRate\\n      realisedGainLossRatio\\n      realisedProfitLossRatio\\n      totalGain\\n      pairs\\n      __typename\\n    }\\n    meta {\\n      total\\n      limit\\n      offset\\n      totalPages\\n      __typename\\n    }\\n    __typename\\n  }\\n}"
-}'
+curl 'https://api.copin.io/graphql' \
+  -H 'accept: */*' \
+  -H 'accept-language: en-US,en;q=0.9,vi;q=0.8' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  --data-raw $'{"operationName":"Search","variables":{"index":"copin.position_statistics","body":{"filter":{"and":[{"field":"totalTrade","gte":"2"},{"field":"profitRate","gte":"60"},{"field":"pnl","gte":"100"},{"field":"winRate","gte":"51"},{"field":"runTimeDays","gte":"7"},{"field":"protocol","in":["GMX","JUPITER"]},{"field":"type","match":"D30"}]},"sorts":[{"field":"realisedPnl","direction":"desc"}],"paging":{"size":12,"from":0}}},"query":"query Search($index: String\u0021, $body: SearchPayload\u0021) {\\n  searchPositionStatistic(index: $index, body: $body) {\\n    data {\\n      id\\n      account\\n      protocol\\n      type\\n      maxDuration\\n      minDuration\\n      avgDuration\\n      realisedTotalGain\\n      totalLose\\n      totalLoss\\n      totalWin\\n      totalTrade\\n      totalLiquidation\\n      totalLiquidationAmount\\n      totalFee\\n      avgVolume\\n      totalVolume\\n      gainLossRatio\\n      orderPositionRatio\\n      profitLossRatio\\n      winRate\\n      longRate\\n      profitRate\\n      pnl\\n      unrealisedPnl\\n      avgRoi\\n      maxRoi\\n      maxPnl\\n      avgLeverage\\n      maxLeverage\\n      minLeverage\\n      runTimeDays\\n      indexTokens\\n      lastTradeAt\\n      lastTradeAtTs\\n      statisticAt\\n      createdAt\\n      updatedAt\\n      realisedTotalGain\\n      realisedTotalLoss\\n      realisedPnl\\n      realisedAvgRoi\\n      realisedMaxRoi\\n      realisedMaxPnl\\n      realisedMaxDrawdown\\n      realisedMaxDrawdownPnl\\n      realisedProfitRate\\n      realisedGainLossRatio\\n      realisedProfitLossRatio\\n      totalGain\\n      pairs\\n      __typename\\n    }\\n    meta {\\n      total\\n      limit\\n      offset\\n      totalPages\\n      __typename\\n    }\\n    __typename\\n  }\\n}"}'
 ```
 ## Response
 The response includes a data property containing the requested GraphQL data.

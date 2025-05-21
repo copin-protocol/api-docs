@@ -42,6 +42,12 @@
       ]
     },
     {
+      "group": "Order",
+      "pages": [
+        "api-reference/orders/list"
+      ]
+    },
+    {
       "group": "Auths",
       "pages": [
         "api-reference/auths/login",
@@ -79,7 +85,8 @@
     {
       "group": "Wallets",
       "pages": [
-        "api-reference/wallets/withdraw"
+        "api-reference/wallets/withdraw",
+        "api-reference/wallets/deposit-withdraw-history"
       ]
     }
   ],

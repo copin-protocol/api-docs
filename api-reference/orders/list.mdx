@@ -1,0 +1,234 @@
+---
+title: "Order List"
+api: "POST https://api.copin.io/{protocol}/order/filter"
+description: "Retrieve orders for a specific protocol"
+---
+
+## Path Parameters
+
+<ParamField path="protocol" type="string" required>
+  The protocol to get positions for. Supported values include: `GMX`, `KWENTA`,
+  `POLYNOMIAL`, `POLYNOMIAL_L2`, `GMX_V2_AVAX`, `GMX_V2`, `GNS`, `GNS_POLY`,
+  `GNS_BASE`, `GNS_APE`, `LEVEL_BNB`, `LEVEL_ARB`, `MUX_ARB`, `APOLLOX_BNB`,
+  `AVANTIS_BASE`, `EQUATION_ARB`, `LOGX_BLAST`, `LOGX_MODE`, `MYX_ARB`,
+  `DEXTORO`, `VELA_ARB`, `HMX_ARB`, `SYNTHETIX_V3`, `SYNTHETIX_V3_ARB`,
+  `KTX_MANTLE`, `CYBERDEX`, `YFX_ARB`, `KILOEX_OPBNB`, `KILOEX_BNB`,
+  `KILOEX_MANTA`, `KILOEX_BASE`, `ROLLIE_SCROLL`, `MUMMY_FANTOM`, `HYPERLIQUID`,
+  `SYNFUTURE_BASE`, `MORPHEX_FANTOM`, `PERENNIAL_ARB`, `BSX_BASE`, `DYDX`,
+  `UNIDEX_ARB`, `VERTEX_ARB`, `HORIZON_BNB`, `HOLDSTATION_ZKSYNC`, `ZENO_METIS`,
+  `LINEHUB_LINEA`, `BMX_BASE`, `FOXIFY_ARB`, `APOLLOX_BASE`, `GMX_AVAX`,
+  `SYNTHETIX`, `DEPERP_BASE`, `ELFI_ARB`
+</ParamField>
+
+## Request Body
+
+<ParamField body="pagination" type="object">
+  Pagination parameters
+  <Expandable title="properties">
+    <ParamField body="limit" type="number" default="20">
+      Number of records to return
+    </ParamField>
+    <ParamField body="offset" type="number" default="0">
+      Number of records to skip
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="sortBy" type="string">
+  Field to sort by. Values: `blockTime`, `blockNumber`.
+</ParamField>
+
+<ParamField body="sortType" type="string" default="desc">
+  Sort direction. Values: `desc`, `asc`
+</ParamField>
+
+<ParamField body="queries" type="array">
+  Array of query objects
+  <Expandable title="properties">
+    <ParamField body="fieldName" type="string">
+      Field name to query. Values: `account`, `status`, `pair`
+    </ParamField>
+    <ParamField body="value" type="string">
+      Value for the field. For type: `OPEN`, `INCREASE`, `DECREASE`, 'CLOSE'. For account: address
+      string. For pair: `ETH-USDT`, `BTC-USDT`,...
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+## Request Example
+
+```json
+{
+  "pagination": {
+    "limit": 20,
+    "offset": 0
+  },
+  "queries": [
+    {
+      "fieldName": "account",
+      "value": "0xA142bF2CAc3B60157a31741BA45D33e84c3D1f39"
+    }
+  ],
+  "sortBy": "blockTime",
+  "sortType": "desc"
+}
+```
+
+## Response
+
+<ResponseField name="data" type="array">
+  Array of trader positions
+    <Expandable title="properties">
+        <ResponseField name="id" type="string">
+            Unique identifier for the order
+        </ResponseField>
+        <ResponseField name="account" type="string">
+            Trader's account address
+        </ResponseField>
+        <ResponseField name="txHash" type="string">
+            Transaction hash
+        </ResponseField>
+        <ResponseField name="logId" type="number">
+            Log ID
+        </ResponseField>
+        <ResponseField name="blockNumber" type="number">
+            Block number
+        </ResponseField>
+        <ResponseField name="blockTime" type="string">
+            Block timestamp
+        </ResponseField>
+        <ResponseField name="key" type="string">
+            Unique key for the position
+        </ResponseField>
+        <ResponseField name="indexToken" type="string">
+            Token address
+        </ResponseField>
+        <ResponseField name="pair" type="string">
+            Trading pair
+        </ResponseField>
+        <ResponseField name="sizeDeltaNumber" type="number">
+            Size delta
+        </ResponseField>
+        <ResponseField name="sizeNumber" type="number">
+            Size number
+        </ResponseField>
+        <ResponseField name="collateralDeltaNumber" type="number">
+            Collateral delta
+        </ResponseField>
+        <ResponseField name="priceNumber" type="number">
+            Price at order execution
+        </ResponseField>
+        <ResponseField name="feeNumber" type="number">
+            Fee amount
+        </ResponseField>
+        <ResponseField name="fundingRateNumber" type="number">
+            Funding rate
+        </ResponseField>
+        <ResponseField name="fundingNumber" type="number">
+            Funding amount
+        </ResponseField>
+        <ResponseField name="leverage" type="number">
+            Leverage used
+        </ResponseField>
+        <ResponseField name="isLong" type="boolean">
+            Whether position is long
+        </ResponseField>
+        <ResponseField name="isOpen" type="boolean">
+            Whether order opened position
+        </ResponseField>
+        <ResponseField name="isClose" type="boolean">
+            Whether order closed position
+        </ResponseField>
+        <ResponseField name="type" type="string">
+            Order type (OPEN, INCREASE, DECREASE, CLOSE, MARGIN_TRANSFERRED)
+        </ResponseField>
+        <ResponseField name="createdAt" type="string">
+            Timestamp when record was created
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+
+<ResponseField name="meta" type="object">
+  Metadata about the response
+  <Expandable title="properties">
+    <ResponseField name="limit" type="number">
+      Number of records returned
+    </ResponseField>
+    <ResponseField name="offset" type="number">
+      Number of records skipped
+    </ResponseField>
+    <ResponseField name="total" type="number">
+      Total number of records matching the query
+    </ResponseField>
+    <ResponseField name="totalPages" type="number">
+      Total number of pages
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Response Example
+
+```json
+{
+  "data": [
+      {
+            "id": "68262d7717b6efe92ce97417",
+            "txHash": "0xcdb3bee00d9e4d2edf0cb684c0bd86bbff73c4ece67fd58d9434169555d85976",
+            "sizeNumber": 56354.6697,
+            "feeNumber": 20.62963683,
+            "isLong": true,
+            "isClose": false,
+            "leverage": 2.47,
+            "type": "DECREASE",
+            "logId": 23,
+            "blockNumber": 337018759,
+            "blockTime": "2025-05-15T18:07:47.000Z",
+            "createdAt": "2025-05-15T18:07:51.221Z",
+            "pair": "ETH-USDT",
+            "updatedAt": "2025-05-16T07:00:12.805Z",
+            "account": "0xA142bF2CAc3B60157a31741BA45D33e84c3D1f39",
+            "collateralNumber": 22654.598713559997,
+            "indexToken": "0x70d95587d40A2caf56bd97485aB3Eec10Bee6336",
+            "collateralDeltaNumber": 2539.8316914300003,
+            "collateralDeltaInTokenNumber": 2540.0857,
+            "priceNumber": 2557.5683,
+            "sizeDeltaNumber": 6261.62,
+            "collateralToken": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+            "sizeDeltaInTokenNumber": 2.4191,
+            "protocol": "GNS"
+        },
+        {
+            "id": "6825ab0e17b6efe92ca12bf6",
+            "txHash": "0xb9e1d919cd9c2638da4d18ba679e6f8943890b45d93e2006d91548d0ddc8611d",
+            "sizeNumber": 43932.4226,
+            "feeNumber": 13.438855980000001,
+            "isLong": true,
+            "isOpen": false,
+            "leverage": 2.01,
+            "type": "INCREASE",
+            "logId": 34,
+            "blockNumber": 336886229,
+            "blockTime": "2025-05-15T08:51:23.000Z",
+            "createdAt": "2025-05-15T08:51:26.924Z",
+            "pair": "SUI-USDT",
+            "updatedAt": "2025-05-16T02:00:07.356Z",
+            "account": "0xA142bF2CAc3B60157a31741BA45D33e84c3D1f39",
+            "collateralNumber": 18984.25398474,
+            "indexToken": "0x6Ecf2133E2C9751cAAdCb6958b9654baE198a797",
+            "collateralDeltaNumber": 3986.16114402,
+            "collateralDeltaInTokenNumber": 3986.5598,
+            "priceNumber": 3.7693,
+            "sizeDeltaNumber": 7992.9579,
+            "collateralToken": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+            "sizeDeltaInTokenNumber": 0,
+            "protocol": "GNS"
+        }
+  ],
+  "meta": {
+    "limit": 20,
+    "offset": 0,
+    "total": 56,
+    "totalPages": 3
+  }
+}
+```
