@@ -4,6 +4,14 @@ api: "POST https://api.copin.io/public/{protocol}/position/statistic/filter"
 description: "Retrieve statistics for traders"
 ---
 
+<ParamField header="Authorization" type="string" required>
+    JWT token in the format: `Authorization {token}`
+</ParamField>
+
+<ParamField header="x-api-key" type="string">
+    Token in the format: `x-api-key {api-key}`
+</ParamField>
+
 # Get Trader Statistics
 
 This endpoint allows you to retrieve detailed statistics for traders on a specific protocol.

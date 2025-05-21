@@ -3,6 +3,16 @@ title: "Order List"
 api: "POST https://api.copin.io/{protocol}/order/filter"
 description: "Retrieve orders for a specific protocol"
 ---
+## Authentication
+This endpoint requires authentication using a JWT token in the Authorization header.
+
+<ParamField header="Authorization" type="string" required>
+    JWT token in the format: `Authorization {token}`
+</ParamField>
+
+<ParamField header="x-api-key" type="string">
+    Token in the format: `x-api-key {api-key}`
+</ParamField>
 
 ## Path Parameters
 

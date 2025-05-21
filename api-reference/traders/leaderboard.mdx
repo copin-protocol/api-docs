@@ -4,6 +4,14 @@ api: "GET https://api.copin.io/leaderboards/page"
 description: "Retrieve trader leaderboard data"
 ---
 
+<ParamField header="Authorization" type="string" required>
+    JWT token in the format: `Authorization {token}`
+</ParamField>
+
+<ParamField header="x-api-key" type="string">
+    Token in the format: `x-api-key {api-key}`
+</ParamField>
+
 ## Query Parameters
 
 <ParamField query="protocol" type="string" required>
