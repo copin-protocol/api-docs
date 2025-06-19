@@ -12,7 +12,7 @@ This guide will help you understand how to use our API to access trader data, st
 All API requests require authentication using an API key. Include your API key in the header of each request:
 
 ```bash
-X-COPIN_API_KEY: YOUR_COPIN_API_KEY
+X-API-KEY: YOUR_COPIN_API_KEY
 ```
 
 Replace `YOUR_COPIN_API_KEY` with the actual API key you received from us.
@@ -85,12 +85,18 @@ The Copin API supports multiple protocols including:
 - SYNTHETIX
 - DEPERP_BASE
 - ELFI_ARB
+- PERPETUAL_OP
+- JUPITER
+- HOLDSTATION_BERA
+- GMX_SOL
+- HYPERLIQUID
+- OSTIUM_ARB
 
 ## Example Integration
 
 ```javascript
 // Sample integration for Copin API
-async function getGMXLeaderboardData() {
+async function getLeaderboardData() {
   // API endpoint to fetch the leaderboard data
   const url = "https://api.copin.io/leaderboards/page";
 
@@ -99,7 +105,7 @@ async function getGMXLeaderboardData() {
 
   // Request headers with authentication
   const headers = {
-    "X-COPIN_API_KEY": apiKey,
+    "X-API-KEY": apiKey,
     Accept: "application/json",
   };
 
@@ -140,5 +146,5 @@ async function getGMXLeaderboardData() {
   }
 }
 // Execute the function
-getGMXLeaderboardData();
+getLeaderboardData();
 ```

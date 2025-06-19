@@ -25,7 +25,8 @@ description: "Retrieve trader leaderboard data"
   `HYPERLIQUID`, `SYNFUTURE_BASE`, `MORPHEX_FANTOM`, `PERENNIAL_ARB`,
   `BSX_BASE`, `DYDX`, `UNIDEX_ARB`, `VERTEX_ARB`, `HORIZON_BNB`,
   `HOLDSTATION_ZKSYNC`, `ZENO_METIS`, `LINEHUB_LINEA`, `BMX_BASE`, `FOXIFY_ARB`,
-  `APOLLOX_BASE`, `GMX_AVAX`, `SYNTHETIX`, `DEPERP_BASE`, `ELFI_ARB`
+  `APOLLOX_BASE`, `GMX_AVAX`, `SYNTHETIX`, `DEPERP_BASE`, `ELFI_ARB`, `PERPETUAL_OP`,
+   `JUPITER`, `HOLDSTATION_BERA`, `GMX_SOL`, `HYPERLIQUID`, `OSTIUM_ARB`
 </ParamField>
 
 <ParamField query="queryDate" type="number" required>
@@ -58,7 +59,7 @@ description: "Retrieve trader leaderboard data"
 
 ```bash
 curl -X GET "https://api.copin.io/leaderboards/page?protocol=KWENTA&queryDate=1701835880676&statisticType=MONTH&limit=20&offset=0&sort_by=ranking&sort_type=asc" \
-  -H "X-COPIN_API_KEY: YOUR_COPIN_API_KEY"
+  -H "X-API-KEY: YOUR_COPIN_API_KEY"
 ```
 
 ## Response
