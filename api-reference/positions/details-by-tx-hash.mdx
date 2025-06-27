@@ -13,7 +13,7 @@ description: "Retrieve details for a specific position"
 
 ## Path Parameters
 
-<ParamField query="protocol" type="string" required>
+<ParamField path="protocol" type="string" required>
     The protocol to get leaderboard for. Supported values include: `GMX`,
     `KWENTA`, `POLYNOMIAL`, `POLYNOMIAL_L2`, `GMX_V2_AVAX`, `GMX_V2`, `GNS`,
     `GNS_POLY`, `GNS_BASE`, `GNS_APE`, `LEVEL_BNB`, `LEVEL_ARB`, `MUX_ARB`,
@@ -32,7 +32,7 @@ description: "Retrieve details for a specific position"
   The open order transaction hash
 </ParamField>
 
-## Request Parameters
+## Request Query
 
 <ParamField query="logId" type="string">
   The open order log id. Goes with the transaction hash
