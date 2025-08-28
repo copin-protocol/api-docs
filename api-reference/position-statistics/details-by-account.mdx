@@ -1,11 +1,11 @@
 ---
 title: "Position Statistic of Trader"
-api: "GET https://api.copin.io/{protocol}/position/statistic/trader/{account}"
+api: "GET https://api.copin.io/public/{protocol}/position/statistic/trader/{account}"
 description: "Retrieve details for a specific trader position statistic"
 ---
 
 ## Authentication
-This endpoint requires authentication using a JWT token in the Authorization header.
+This endpoint requires authentication using a JWT token or API-KEY in the header.
 
 <ParamField header="Authorization" type="string">
     JWT token in the format: `Authorization {token}`
@@ -18,7 +18,7 @@ This endpoint requires authentication using a JWT token in the Authorization hea
 ## Path Parameters
 
 <ParamField path="protocol" type="string" required>
-    The protocol to get leaderboard for. Supported values include: `GMX`,
+    The supported protocols include: `GMX`,
     `KWENTA`, `POLYNOMIAL`, `POLYNOMIAL_L2`, `GMX_V2_AVAX`, `GMX_V2`, `GNS`,
     `GNS_POLY`, `GNS_BASE`, `GNS_APE`, `LEVEL_BNB`, `LEVEL_ARB`, `MUX_ARB`,
     `APOLLOX_BNB`, `AVANTIS_BASE`, `EQUATION_ARB`, `LOGX_BLAST`, `LOGX_MODE`,
@@ -39,9 +39,9 @@ This endpoint requires authentication using a JWT token in the Authorization hea
 ## Request Example
 
 ```bash
-curl -X GET "https://api.copin.io/KILOEX_BASE/position/statistic/trader/0xd649A0876453Fc7626569B28E364262192874E18" \
+curl -X GET "https://api.copin.io/public/KILOEX_BASE/position/statistic/trader/0xd649A0876453Fc7626569B28E364262192874E18" \
 --header 'Content-Type: application/json' \
---header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjB4MTUzNTQ4NGMxRWVjMUQyMDNmRTFBNTNFQTExYTYyMWE4ODRBRTA2NyIsInRpbWUiOjE3NDQ2MjYxNjIzODksImFjY2VzcyI6IlVmTkNiTWhMVVMxNzQ0NjI2MTYyMzkwIiwiaWF0IjoxNzQ0NjI2MTYyLCJleHAiOjE3NDUyMzA5NjJ9.LpvhBdxyfehzom-v5tKumAqCptSMkVk7HVKKVtjSpk8'
+--header 'x-api-key: u9jpUfrTAukk45QjWVg7DBtQYxdGgx'
 ```
 
 ## Response:

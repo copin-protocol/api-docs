@@ -1,0 +1,224 @@
+---
+title: "Live Order By GraphQL"
+api: "POST https://api.copin.io/graphql"
+description: "Retrieve orders for multi protocols"
+---
+
+## Authentication
+This endpoint requires authentication using a JWT token or API-KEY in the header.
+
+<ParamField header="Authorization" type="string">
+    JWT token in the format: `Authorization {token}`
+</ParamField>
+
+<ParamField header="x-api-key" type="string">
+    Token in the format: `x-api-key {api-key}`
+</ParamField>
+
+## Request Query
+
+Query name: searchOrders
+
+## Request Body
+
+<ParamField body="operationName" type="string" required>
+    Name of the GraphQL operation (e.g., "Search")
+</ParamField>
+
+<ParamField body="variables" type="object" required>
+    Variables for the GraphQL query
+    <Expandable title="properties">
+        <ParamField body="index" type="string" required>
+            The index to search in (e.g., "copin.orders")
+        </ParamField>
+        <ParamField body="body" type="object" required>
+            Query parameters
+            <Expandable title="properties">
+                <ParamField body="filter" type="object" required>
+                    Filter criteria for the search
+                    <Expandable title="properties">
+                        <ParamField body="and" type="array" required>
+                            Array of filter conditions that must all be satisfied
+                        </ParamField>
+                    </Expandable>
+                </ParamField>
+                <ParamField body="sorts" type="array" required>
+                    Sorting criteria for the results
+                </ParamField>
+                <ParamField body="paging" type="object" required>
+                    Pagination parameters
+                    <Expandable title="properties">
+                        <ParamField body="size" type="number" default="12">
+                            Number of records to return
+                        </ParamField>
+                        <ParamField body="from" type="number" default="0">
+                            Number of records to skip
+                        </ParamField>
+                    </Expandable>
+                </ParamField>
+            </Expandable>
+        </ParamField>
+    </Expandable>
+</ParamField>
+
+<ParamField body="query" type="string" required>
+    GraphQL query string
+</ParamField>
+
+## Request Example
+
+```bash
+curl 'https://api.copin.io/graphql' \
+-H 'accept: */*' \
+-H 'accept-language: en-US,en;q=0.9,vi;q=0.8' \
+-H 'x-api-key: u9jpUfrTAukk45QjWVg7DBtQYxdGgx' \
+-H 'cache-control: no-cache' \
+-H 'content-type: application/json' \
+--data-raw $'{"operationName":"Search","variables":{"index":"copin.orders","body":{"filter":{"and":[{"field":"protocol","in":["GMX_V2","GNS_APE"]},{"field":"blockTime","lte":"2025-08-28T09:34:15.693Z","gte":"2025-08-27T09:34:15.693Z"}]},"sorts":[{"field":"blockTime","direction":"desc"}],"paging":{"size":20,"from":0}}},"query":"query Search($index: String\u0021, $body: SearchPayload\u0021) {\\n  searchOrders(index: $index, body: $body) {\\n    data {\\n      id\\n      account\\n      key\\n      protocol\\n      txHash\\n      indexToken\\n      collateralToken\\n      sizeDeltaNumber\\n      sizeNumber\\n      collateralDeltaNumber\\n      collateralNumber\\n      collateralDeltaInTokenNumber\\n      sizeDeltaInTokenNumber\\n      realisedPnlNumber\\n      priceNumber\\n      sizeTokenNumber\\n      averagePriceNumber\\n      feeNumber\\n      fundingNumber\\n      realisedPnl\\n      isLong\\n      isOpen\\n      isClose\\n      leverage\\n      type\\n      logId\\n      blockNumber\\n      protocol\\n      blockTime\\n      createdAt\\n      pair\\n      __typename\\n    }\\n    meta {\\n      total\\n      limit\\n      offset\\n      totalPages\\n      __typename\\n    }\\n    __typename\\n  }\\n}"}'
+```
+## Response
+The response includes a data property containing the requested GraphQL data.
+
+<ResponseField name="data" type="array">
+    Array of trader positions
+    <Expandable title="properties">
+        <ResponseField name="id" type="string">
+            Unique identifier for the order
+        </ResponseField>
+        <ResponseField name="account" type="string">
+            Trader's account address
+        </ResponseField>
+        <ResponseField name="txHash" type="string">
+            Transaction hash
+        </ResponseField>
+        <ResponseField name="logId" type="number">
+            Log ID
+        </ResponseField>
+        <ResponseField name="blockNumber" type="number">
+            Block number
+        </ResponseField>
+        <ResponseField name="blockTime" type="string">
+            Block timestamp
+        </ResponseField>
+        <ResponseField name="key" type="string">
+            Unique key for the position
+        </ResponseField>
+        <ResponseField name="indexToken" type="string">
+            Token address
+        </ResponseField>
+        <ResponseField name="pair" type="string">
+            Trading pair
+        </ResponseField>
+        <ResponseField name="sizeDeltaNumber" type="number">
+            Size delta
+        </ResponseField>
+        <ResponseField name="sizeNumber" type="number">
+            Size number
+        </ResponseField>
+        <ResponseField name="collateralDeltaNumber" type="number">
+            Collateral delta
+        </ResponseField>
+        <ResponseField name="priceNumber" type="number">
+            Price at order execution
+        </ResponseField>
+        <ResponseField name="feeNumber" type="number">
+            Fee amount
+        </ResponseField>
+        <ResponseField name="fundingRateNumber" type="number">
+            Funding rate
+        </ResponseField>
+        <ResponseField name="fundingNumber" type="number">
+            Funding amount
+        </ResponseField>
+        <ResponseField name="leverage" type="number">
+            Leverage used
+        </ResponseField>
+        <ResponseField name="isLong" type="boolean">
+            Whether position is long
+        </ResponseField>
+        <ResponseField name="isOpen" type="boolean">
+            Whether order opened position
+        </ResponseField>
+        <ResponseField name="isClose" type="boolean">
+            Whether order closed position
+        </ResponseField>
+        <ResponseField name="type" type="string">
+            Order type (OPEN, INCREASE, DECREASE, CLOSE, MARGIN_TRANSFERRED)
+        </ResponseField>
+        <ResponseField name="createdAt" type="string">
+            Timestamp when record was created
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+
+<ResponseField name="meta" type="object">
+    Metadata about the response
+    <Expandable title="properties">
+        <ResponseField name="limit" type="number">
+            Number of records returned
+        </ResponseField>
+        <ResponseField name="offset" type="number">
+            Number of records skipped
+        </ResponseField>
+        <ResponseField name="total" type="number">
+            Total number of records matching the query
+        </ResponseField>
+        <ResponseField name="totalPages" type="number">
+            Total number of pages
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+
+## Response Example
+
+```json
+{
+    "data": {
+        "searchOrders": {
+            "data": [
+                {
+                    "id": "68b0229060ef2b0915ca42c4",
+                    "account": "0xA12ad018511FA7b5f43334960f25Df8A1e765c8B",
+                    "key": null,
+                    "protocol": "GMX_V2",
+                    "txHash": "0x8df46fa4875c331d8f6cb97f890ecbfe0b064fa51843664c329043b4c2a49285",
+                    "indexToken": "0xBcb8FE13d02b023e8f94f6881Cc0192fd918A5C0",
+                    "collateralToken": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+                    "sizeDeltaNumber": 1157.1429,
+                    "sizeNumber": 1157.1429,
+                    "collateralDeltaNumber": 192.17828025,
+                    "collateralNumber": 192.17828025,
+                    "collateralDeltaInTokenNumber": null,
+                    "sizeDeltaInTokenNumber": null,
+                    "realisedPnlNumber": null,
+                    "priceNumber": 47.879203,
+                    "sizeTokenNumber": null,
+                    "averagePriceNumber": null,
+                    "feeNumber": 0.6595340399999999,
+                    "fundingNumber": null,
+                    "realisedPnl": null,
+                    "isLong": true,
+                    "isOpen": true,
+                    "isClose": null,
+                    "leverage": 6.02,
+                    "type": "INCREASE",
+                    "logId": 48,
+                    "blockNumber": 373137879,
+                    "blockTime": "2025-08-28T09:34:06.000Z",
+                    "createdAt": "2025-08-28T09:34:08.844Z",
+                    "pair": "HYPE-USDT",
+                    "__typename": "Order"
+                }
+            ],
+            "meta": {
+                "total": 6929,
+                "limit": 20,
+                "offset": 0,
+                "totalPages": 347,
+                "__typename": "PagingOutput"
+            },
+            "__typename": "OrdersSearchResponse"
+        }
+    }
+}
+```

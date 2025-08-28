@@ -3,6 +3,9 @@ title: "Position By Id"
 api: "GET https://api.copin.io/{protocol}/position/detail/{positionId}"
 description: "Retrieve details for a specific position"
 ---
+## Authentication
+This endpoint requires authentication using a JWT token or API-KEY in the header.
+
 <ParamField header="Authorization" type="string">
     JWT token in the format: `Authorization {token}`
 </ParamField>
@@ -14,7 +17,7 @@ description: "Retrieve details for a specific position"
 ## Path Parameters
 
 <ParamField path="protocol" type="string" required>
-    The protocol to get leaderboard for. Supported values include: `GMX`,
+    The supported protocols include: `GMX`,
     `KWENTA`, `POLYNOMIAL`, `POLYNOMIAL_L2`, `GMX_V2_AVAX`, `GMX_V2`, `GNS`,
     `GNS_POLY`, `GNS_BASE`, `GNS_APE`, `LEVEL_BNB`, `LEVEL_ARB`, `MUX_ARB`,
     `APOLLOX_BNB`, `AVANTIS_BASE`, `EQUATION_ARB`, `LOGX_BLAST`, `LOGX_MODE`,
@@ -36,7 +39,7 @@ description: "Retrieve details for a specific position"
 
 ```bash
 curl -X GET "https://api.copin.io/KWENTA/position/detail/66770ea792f8a3cde4c37a54" \
-  -H "X-API-KEY: YOUR_COPIN_API_KEY"
+-H 'x-api-key: u9jpUfrTAukk45QjWVg7DBtQYxdGgx'
 ```
 
 ## Response:

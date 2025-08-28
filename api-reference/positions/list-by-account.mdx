@@ -1,8 +1,9 @@
 ---
-title: "Position List"
-api: "POST https://api.copin.io/{protocol}/position/filter"
+title: "Position List By Account"
+api: "POST https://api.copin.io/{protocol}/position/filter/{account}"
 description: "Retrieve positions for a specific protocol"
 ---
+
 ## Authentication
 This endpoint requires authentication using a JWT token or API-KEY in the header.
 
@@ -17,7 +18,7 @@ This endpoint requires authentication using a JWT token or API-KEY in the header
 ## Path Parameters
 
 <ParamField path="protocol" type="string" required>
-    The supported protocols include:: `GMX`,
+    The supported protocols include: `GMX`,
     `KWENTA`, `POLYNOMIAL`, `POLYNOMIAL_L2`, `GMX_V2_AVAX`, `GMX_V2`, `GNS`,
     `GNS_POLY`, `GNS_BASE`, `GNS_APE`, `LEVEL_BNB`, `LEVEL_ARB`, `MUX_ARB`,
     `APOLLOX_BNB`, `AVANTIS_BASE`, `EQUATION_ARB`, `LOGX_BLAST`, `LOGX_MODE`,
@@ -29,6 +30,9 @@ This endpoint requires authentication using a JWT token or API-KEY in the header
     `HOLDSTATION_ZKSYNC`, `ZENO_METIS`, `LINEHUB_LINEA`, `BMX_BASE`, `FOXIFY_ARB`,
     `APOLLOX_BASE`, `GMX_AVAX`, `SYNTHETIX`, `DEPERP_BASE`, `ELFI_ARB`, `PERPETUAL_OP`,
     `JUPITER`, `HOLDSTATION_BERA`, `GMX_SOL`, `HYPERLIQUID`, `OSTIUM_ARB`
+</ParamField>
+
+<ParamField path="account" type="string" required>
 </ParamField>
 
 ## Request Body
@@ -71,7 +75,7 @@ This endpoint requires authentication using a JWT token or API-KEY in the header
 ## Request Example
 
 ```bash
-curl 'https://api.copin.io/JUPITER/position/filter' \
+curl 'https://api.copin.io/JUPITER/position/filter/3XVpxh8hHGhEgnAEmLBy5v7vJuR2gjVk7qMF5yKcfGQy' \
   -H 'accept: application/json, text/plain, */*' \
   -H 'accept-language: en-US,en;q=0.9,vi;q=0.8' \
   -H 'access-control-max-age: 600' \
