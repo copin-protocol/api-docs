@@ -71,7 +71,7 @@ Query name: searchOrders
 curl 'https://api.copin.io/graphql' \
 -H 'accept: */*' \
 -H 'accept-language: en-US,en;q=0.9,vi;q=0.8' \
--H 'x-api-key: u9jpUfrTAukk45QjWVg7DBtQYxdGgx' \
+-H 'x-api-key: u9jpUfrTAukk45QjWVg7DBtQYxdGgy' \
 -H 'cache-control: no-cache' \
 -H 'content-type: application/json' \
 --data-raw $'{"operationName":"Search","variables":{"index":"copin.orders","body":{"filter":{"and":[{"field":"protocol","in":["GMX_V2","GNS_APE"]},{"field":"blockTime","lte":"2025-08-28T09:34:15.693Z","gte":"2025-08-27T09:34:15.693Z"}]},"sorts":[{"field":"blockTime","direction":"desc"}],"paging":{"size":20,"from":0}}},"query":"query Search($index: String\u0021, $body: SearchPayload\u0021) {\\n  searchOrders(index: $index, body: $body) {\\n    data {\\n      id\\n      account\\n      key\\n      protocol\\n      txHash\\n      indexToken\\n      collateralToken\\n      sizeDeltaNumber\\n      sizeNumber\\n      collateralDeltaNumber\\n      collateralNumber\\n      collateralDeltaInTokenNumber\\n      sizeDeltaInTokenNumber\\n      realisedPnlNumber\\n      priceNumber\\n      sizeTokenNumber\\n      averagePriceNumber\\n      feeNumber\\n      fundingNumber\\n      realisedPnl\\n      isLong\\n      isOpen\\n      isClose\\n      leverage\\n      type\\n      logId\\n      blockNumber\\n      protocol\\n      blockTime\\n      createdAt\\n      pair\\n      __typename\\n    }\\n    meta {\\n      total\\n      limit\\n      offset\\n      totalPages\\n      __typename\\n    }\\n    __typename\\n  }\\n}"}'
