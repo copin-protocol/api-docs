@@ -1,8 +1,12 @@
 ---
-title: "Position By Tx Hash"
+title: "Position By txHash"
 api: "GET https://api.copin.io/{protocol}/position/{txHash}"
-description: "Retrieve details for a specific position"
+description: "Retrieve positions by txHash"
 ---
+
+## Authentication
+This endpoint requires authentication using a JWT token or API-KEY in the header.
+
 <ParamField header="Authorization" type="string">
     JWT token in the format: `Authorization {token}`
 </ParamField>
@@ -14,7 +18,7 @@ description: "Retrieve details for a specific position"
 ## Path Parameters
 
 <ParamField path="protocol" type="string" required>
-    The protocol to get leaderboard for. Supported values include: `GMX`,
+    The supported protocols include: `GMX`,
     `KWENTA`, `POLYNOMIAL`, `POLYNOMIAL_L2`, `GMX_V2_AVAX`, `GMX_V2`, `GNS`,
     `GNS_POLY`, `GNS_BASE`, `GNS_APE`, `LEVEL_BNB`, `LEVEL_ARB`, `MUX_ARB`,
     `APOLLOX_BNB`, `AVANTIS_BASE`, `EQUATION_ARB`, `LOGX_BLAST`, `LOGX_MODE`,
@@ -49,8 +53,9 @@ description: "Retrieve details for a specific position"
 ## Request Example
 
 ```bash
-curl -X GET "https://api.copin.io/KWENTA/position/0xb6c1d05806205893e33e2248fb67a7701931126777d3e706d91d7503dd83b34e?logId=11&account=0x852610C4BD327C9c7fd93e06505173092f29a39c&isLong=true" \
-  -H "X-API-KEY: YOUR_COPIN_API_KEY"
+curl --request GET \
+  --url https://api.copin.io/GMX_V2/position/0xe614b4c0eee87864c62ee58d8caf156ab20c414c15212a851054814806513a27 \
+  --header 'x-api-key: u9jpUfrTAukk45QjWVg7DBtQYxdGgy'
 ```
 
 ## Response:
@@ -252,82 +257,43 @@ curl -X GET "https://api.copin.io/KWENTA/position/0xb6c1d05806205893e33e2248fb67
 ```json
 [
   {
-    "id": "656444f14350fb0b69bd6402",
-    "synthetixPositionId": "48503",
-    "reverseIndex": 0,
-    "account": "0x852610C4BD327C9c7fd93e06505173092f29a39c",
-    "key": "0x375fa2B494208b0F4f3f5f0b85121844a929AE6C-0x2B3bb4c683BFc5239B029131EEf3B1d214478d93-LONG",
-    "logId": 11,
-    "openBlockNumber": 112735639,
-    "openBlockTime": "2023-11-27T07:27:35.000Z",
-    "closeBlockNumber": 112797988,
-    "closeBlockTime": "2023-11-28T18:05:53.000Z",
-    "indexToken": "0x2B3bb4c683BFc5239B029131EEf3B1d214478d93",
-    "size": 299791.2220018517,
-    "fee": 228.62124740700003,
-    "collateral": 16215.501363168,
-    "averagePrice": 2022.9018492877242,
-    "funding": -112.83324162360957,
-    "pnl": 3993.0761273536705,
-    "realisedPnl": 4334.53061638428,
-    "roi": 24.625054988577602,
-    "realisedRoi": 26.730783830278366,
+    "id": "68b013c560ef2b091560eef4",
+    "account": "0x35C85d656F3465176dD6906f2F6800C121Ee5BD8",
+    "key": "0x79f8ea29781e33491e36df651b09ee3362f1ef994b56308c50475c3ac4e8839e",
+    "logId": 28,
+    "indexToken": "0x09400D9DB990D5ed3f35D7be61DfAEB900Af03C9",
+    "leverage": 49.974536479476136,
+    "size": 2449.5118,
+    "collateralToken": "49.0201",
+    "collateral": 49.01519799,
+    "averagePrice": 214.114837,
+    "fee": 2.4546069900000003,
+    "realisedPnl": 12.291132520720291,
+    "pnl": 9.83652553072029,
+    "realisedRoi": 25.08,
+    "roi": 20.07,
     "isLong": true,
+    "openBlockNumber": 373122680,
+    "closeBlockNumber": 373123787,
+    "durationInSecond": 369,
+    "orderCount": 2,
+    "orderIncreaseCount": 1,
+    "orderDecreaseCount": 1,
     "isWin": true,
     "isLiquidate": false,
-    "leverage": 18.487940353346062,
-    "orderCount": 6,
-    "orderIncreaseCount": 3,
-    "orderDecreaseCount": 3,
-    "durationInSecond": 124698,
     "status": "CLOSE",
-    "createdAt": "2023-11-27T07:27:45.029Z",
-    "protocol": "KWENTA",
-    "orders": [
-      {
-        "id": "656444f1c6583cc67b6985b6",
-        "account": "0x852610C4BD327C9c7fd93e06505173092f29a39c",
-        "txHash": "0xb6c1d05806205893e33e2248fb67a7701931126777d3e706d91d7503dd83b34e",
-        "logId": 11,
-        "blockNumber": 112735639,
-        "blockTime": "2023-11-27T07:27:35.000Z",
-        "key": "0x375fa2B494208b0F4f3f5f0b85121844a929AE6C-0x2B3bb4c683BFc5239B029131EEf3B1d214478d93-LONG",
-        "indexToken": "0x2B3bb4c683BFc5239B029131EEf3B1d214478d93",
-        "sizeDeltaNumber": 149884.05160703347,
-        "sizeNumber": 73.5244,
-        "collateralDeltaNumber": 9967.858290134,
-        "priceNumber": 2038.562050245,
-        "fundingRateNumber": 0.000209485,
-        "fundingNumber": -194.18719593,
-        "leverage": 15.036735800646957,
-        "isLong": true,
-        "isOpen": true,
-        "type": "OPEN",
-        "createdAt": "2023-11-27T07:27:45.026Z"
-      },
-      {
-        "id": "65662c12c6583cc67b6b55d1",
-        "account": "0x852610C4BD327C9c7fd93e06505173092f29a39c",
-        "txHash": "0x267f696c7e751ea6e39eeb576988f069f9535714331117954fb9c61838d637b6",
-        "logId": 12,
-        "blockNumber": 112797988,
-        "blockTime": "2023-11-28T18:05:53.000Z",
-        "key": "0x375fa2B494208b0F4f3f5f0b85121844a929AE6C-0x2B3bb4c683BFc5239B029131EEf3B1d214478d93-LONG",
-        "indexToken": "0x2B3bb4c683BFc5239B029131EEf3B1d214478d93",
-        "sizeDeltaNumber": 153118.087865516,
-        "sizeNumber": 74.1986,
-        "collateralDeltaNumber": 363.81130071199914,
-        "priceNumber": 2063.625026153,
-        "feeNumber": 228.62124740700003,
-        "fundingRateNumber": 0,
-        "fundingNumber": -195.163117027,
-        "leverage": 18.487940353346062,
-        "isLong": true,
-        "isClose": true,
-        "type": "CLOSE",
-        "createdAt": "2023-11-28T18:06:10.036Z"
-      }
-    ]
+    "openBlockTime": "2025-08-28T08:30:57.000Z",
+    "closeBlockTime": "2025-08-28T08:35:34.000Z",
+    "totalDecreasePnl": 0,
+    "closePrice": 215.18922,
+    "protocol": "GMX_V2",
+    "txHashes": [
+      "0xc0abc39677962d8357731c438f59aec1337ea801a40730d7d4a7b47f1210c143",
+      "0xe614b4c0eee87864c62ee58d8caf156ab20c414c15212a851054814806513a27"
+    ],
+    "createdAt": "2025-08-28T08:31:01.132Z",
+    "pair": "SOL-USDT",
+    "updatedAt": "2025-08-28T08:41:06.162Z"
   }
 ]
 ```

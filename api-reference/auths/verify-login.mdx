@@ -11,11 +11,12 @@ description: "Verify Web3 authentication and complete login process"
 </ParamField>
 
 <ParamField body="sign" type="string" required>
-    The signature created by signing the verification code with the user's private key. Message: `I want to login on Copin.io at ${time}. Login code: ${verifyCode}`
+    The signature created by signing the verification code with the user's private key. Message: `I want to login on Copin.io at ${time}. Login code: ${verifyCode}`.
+    Ex: const sign = await signer.signMessage(message)
 </ParamField>
 
 <ParamField body="time" type="string" required>
-    Date-time  of the verification request
+    Date-time of the verification request
 </ParamField>
 
 <ParamField body="referralCode" type="string">

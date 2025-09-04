@@ -1,11 +1,11 @@
 ---
-title: "Position Statistic List Graphql"
+title: "Position Statistic List GraphQL"
 api: "POST https://api.copin.io/graphql"
 description: "Retrieve position statistics for multi protocols"
 ---
 
 ## Authentication
-This endpoint requires authentication using a JWT token in the Authorization header.
+This endpoint requires authentication using a JWT token or API-KEY in the header.
 
 <ParamField header="Authorization" type="string">
     JWT token in the format: `Authorization {token}`
@@ -14,6 +14,10 @@ This endpoint requires authentication using a JWT token in the Authorization hea
 <ParamField header="x-api-key" type="string">
     Token in the format: `x-api-key {api-key}`
 </ParamField>
+
+## Request Query
+
+Query name: searchPositionStatistic
 
 ## Request Body
 
@@ -69,6 +73,7 @@ curl 'https://api.copin.io/graphql' \
   -H 'accept-language: en-US,en;q=0.9,vi;q=0.8' \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
+  -H 'x-api-key: u9jpUfrTAukk45QjWVg7DBtQYxdGgy' \
   --data-raw $'{"operationName":"Search","variables":{"index":"copin.position_statistics","body":{"filter":{"and":[{"field":"totalTrade","gte":"2"},{"field":"profitRate","gte":"60"},{"field":"pnl","gte":"100"},{"field":"winRate","gte":"51"},{"field":"runTimeDays","gte":"7"},{"field":"protocol","in":["GMX","JUPITER"]},{"field":"type","match":"D30"}]},"sorts":[{"field":"realisedPnl","direction":"desc"}],"paging":{"size":12,"from":0}}},"query":"query Search($index: String\u0021, $body: SearchPayload\u0021) {\\n  searchPositionStatistic(index: $index, body: $body) {\\n    data {\\n      id\\n      account\\n      protocol\\n      type\\n      maxDuration\\n      minDuration\\n      avgDuration\\n      realisedTotalGain\\n      totalLose\\n      totalLoss\\n      totalWin\\n      totalTrade\\n      totalLiquidation\\n      totalLiquidationAmount\\n      totalFee\\n      avgVolume\\n      totalVolume\\n      gainLossRatio\\n      orderPositionRatio\\n      profitLossRatio\\n      winRate\\n      longRate\\n      profitRate\\n      pnl\\n      unrealisedPnl\\n      avgRoi\\n      maxRoi\\n      maxPnl\\n      avgLeverage\\n      maxLeverage\\n      minLeverage\\n      runTimeDays\\n      indexTokens\\n      lastTradeAt\\n      lastTradeAtTs\\n      statisticAt\\n      createdAt\\n      updatedAt\\n      realisedTotalGain\\n      realisedTotalLoss\\n      realisedPnl\\n      realisedAvgRoi\\n      realisedMaxRoi\\n      realisedMaxPnl\\n      realisedMaxDrawdown\\n      realisedMaxDrawdownPnl\\n      realisedProfitRate\\n      realisedGainLossRatio\\n      realisedProfitLossRatio\\n      totalGain\\n      pairs\\n      __typename\\n    }\\n    meta {\\n      total\\n      limit\\n      offset\\n      totalPages\\n      __typename\\n    }\\n    __typename\\n  }\\n}"}'
 ```
 ## Response

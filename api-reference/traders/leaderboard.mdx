@@ -4,6 +4,9 @@ api: "GET https://api.copin.io/leaderboards/page"
 description: "Retrieve trader leaderboard data"
 ---
 
+## Authentication
+This endpoint requires authentication using a JWT token or API-KEY in the header.
+
 <ParamField header="Authorization" type="string">
     JWT token in the format: `Authorization {token}`
 </ParamField>
@@ -15,7 +18,7 @@ description: "Retrieve trader leaderboard data"
 ## Request Query
 
 <ParamField query="protocol" type="string" required>
-  The protocol to get leaderboard for. Supported values include: `GMX`,
+   The supported protocols include: `GMX`,
   `KWENTA`, `POLYNOMIAL`, `POLYNOMIAL_L2`, `GMX_V2_AVAX`, `GMX_V2`, `GNS`,
   `GNS_POLY`, `GNS_BASE`, `GNS_APE`, `LEVEL_BNB`, `LEVEL_ARB`, `MUX_ARB`,
   `APOLLOX_BNB`, `AVANTIS_BASE`, `EQUATION_ARB`, `LOGX_BLAST`, `LOGX_MODE`,
@@ -59,7 +62,7 @@ description: "Retrieve trader leaderboard data"
 
 ```bash
 curl -X GET "https://api.copin.io/leaderboards/page?protocol=KWENTA&queryDate=1701835880676&statisticType=MONTH&limit=20&offset=0&sort_by=ranking&sort_type=asc" \
-  -H "X-API-KEY: YOUR_COPIN_API_KEY"
+  -H 'x-api-key: u9jpUfrTAukk45QjWVg7DBtQYxdGgy'
 ```
 
 ## Response

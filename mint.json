@@ -27,24 +27,38 @@
       "pages": ["api-reference/introduction"]
     },
     {
-      "group": "Traders",
+      "group": "Trader Explorer",
       "pages": [
-        "api-reference/traders/statistics",
+        "api-reference/position-statistics/list-by-graphql",
+        "api-reference/position-statistics/pnl-statistic"
+      ]
+    },
+    {
+      "group": "Trader Profile",
+      "pages": [
+        "api-reference/position-statistics/details-by-account",
+        "api-reference/positions/list-by-account",
+        "api-reference/positions/details-by-id",
+        "api-reference/positions/details-by-tx-hash"
+      ]
+    },
+    {
+      "group": "Open Interest",
+      "pages": [
+        "api-reference/positions/oi-position-by-graphql"
+      ]
+    },
+    {
+      "group": "Live Trade",
+      "pages": [
+        "api-reference/orders/live-order-by-graphql",
+        "api-reference/positions/live-position-by-graphql"
+      ]
+    },
+    {
+      "group": "Trader Board",
+      "pages": [
         "api-reference/traders/leaderboard"
-      ]
-    },
-    {
-      "group": "Positions",
-      "pages": [
-        "api-reference/positions/list",
-        "api-reference/positions/details-by-tx-hash",
-        "api-reference/positions/details-by-id"
-      ]
-    },
-    {
-      "group": "Order",
-      "pages": [
-        "api-reference/orders/list"
       ]
     },
     {
@@ -73,20 +87,20 @@
       ]
     },
     {
-      "group": "Position Statistics",
-      "pages": [
-        "api-reference/position-statistics/details-by-account",
-        "api-reference/position-statistics/list",
-        "api-reference/position-statistics/list-by-api-key",
-        "api-reference/position-statistics/list-by-graphql",
-        "api-reference/position-statistics/pnl-statistic"
-      ]
-    },
-    {
       "group": "Wallets",
       "pages": [
         "api-reference/wallets/withdraw",
         "api-reference/wallets/deposit-withdraw-history"
+      ]
+    },
+    {
+      "group": "Mixins",
+      "pages": [
+        "api-reference/position-statistics/list-by-api-key",
+        "api-reference/position-statistics/list",
+        "api-reference/position-statistics/statistics",
+        "api-reference/positions/list",
+        "api-reference/orders/list"
       ]
     }
   ],

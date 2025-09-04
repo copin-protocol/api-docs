@@ -4,7 +4,7 @@ api: "POST https://api.copin.io/{protocol}/order/filter"
 description: "Retrieve orders for a specific protocol"
 ---
 ## Authentication
-This endpoint requires authentication using a JWT token in the Authorization header.
+This endpoint requires authentication using a JWT token or API-KEY in the header.
 
 <ParamField header="Authorization" type="string">
     JWT token in the format: `Authorization {token}`
@@ -17,7 +17,7 @@ This endpoint requires authentication using a JWT token in the Authorization hea
 ## Path Parameters
 
 <ParamField path="protocol" type="string" required>
-    The protocol to get leaderboard for. Supported values include: `GMX`,
+    The supported protocols include: `GMX`,
     `KWENTA`, `POLYNOMIAL`, `POLYNOMIAL_L2`, `GMX_V2_AVAX`, `GMX_V2`, `GNS`,
     `GNS_POLY`, `GNS_BASE`, `GNS_APE`, `LEVEL_BNB`, `LEVEL_ARB`, `MUX_ARB`,
     `APOLLOX_BNB`, `AVANTIS_BASE`, `EQUATION_ARB`, `LOGX_BLAST`, `LOGX_MODE`,
