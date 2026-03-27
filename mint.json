@@ -34,6 +34,13 @@
       ]
     },
     {
+      "group": "Hyperliquid Explorer",
+      "pages": [
+        "api-reference/position-statistics/hyperliquid-by-graphql",
+        "api-reference/position-statistics/hyperliquid-pnl-statistic"
+      ]
+    },
+    {
       "group": "Trader Profile",
       "pages": [
         "api-reference/position-statistics/details-by-account",
