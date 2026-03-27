@@ -24,7 +24,7 @@ This endpoint requires authentication using a JWT token or API-KEY in the header
             Account for filter
         </ParamField>
         <ParamField body="protocol" type="string">
-            Protocol for filter (KILOEX_BASE, GMX, GNS...)
+            Protocol for filter (HYPERLIQUID)
         </ParamField>
     </Expandable>
 </ParamField>
@@ -36,17 +36,17 @@ This endpoint requires authentication using a JWT token or API-KEY in the header
 
 ```bash
 curl --request POST \
---url "https://api.copin.io/public/position/statistic/pnl-statistics" \
+--url "https://api.copin.io/public/position/statistic-hyperliquid/pnl-statistics" \
 --header 'Content-Type: application/json' \
 --header 'x-api-key: u9jpUfrTAukk45QjWVg7DBtQYxdGgy' \
 --data '{
   "accounts": [
     {
       "account": "0xd649A0876453Fc7626569B28E364262192874E18",
-      "protocol": "KILOEX_BASE"
+      "protocol": "HYPERLIQUID"
     }
   ],
-  "statisticType": "D15"
+  "statisticType": "D30"
 }'
 ```
 ## Response

@@ -74,7 +74,7 @@ curl 'https://api.copin.io/graphql' \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
   -H 'x-api-key: u9jpUfrTAukk45QjWVg7DBtQYxdGgy' \
-  --data-raw $'{"operationName":"Search","variables":{"index":"copin.position_statistics_hyperliquid","body":{"filter":{"and":[{"field":"totalTrade","gte":"2"},{"field":"profitRate","gte":"60"},{"field":"pnl","gte":"100"},{"field":"winRate","gte":"51"},{"field":"runTimeDays","gte":"7"},{"field":"protocol","in":["GMX","JUPITER"]},{"field":"type","match":"D30"}]},"sorts":[{"field":"realisedPnl","direction":"desc"}],"paging":{"size":12,"from":0}}},"query":"query Search($index: String\u0021, $body: SearchPayload\u0021) {\\n  searchPositionStatistic(index: $index, body: $body) {\\n    data {\\n      id\\n      account\\n      protocol\\n      type\\n      maxDuration\\n      minDuration\\n      avgDuration\\n      realisedTotalGain\\n      totalLose\\n      totalLoss\\n      totalWin\\n      totalTrade\\n      totalLiquidation\\n      totalLiquidationAmount\\n      totalFee\\n      avgVolume\\n      totalVolume\\n      gainLossRatio\\n      orderPositionRatio\\n      profitLossRatio\\n      winRate\\n      longRate\\n      profitRate\\n      pnl\\n      unrealisedPnl\\n      avgRoi\\n      maxRoi\\n      maxPnl\\n      avgLeverage\\n      maxLeverage\\n      minLeverage\\n      runTimeDays\\n      indexTokens\\n      lastTradeAt\\n      lastTradeAtTs\\n      statisticAt\\n      createdAt\\n      updatedAt\\n      realisedTotalGain\\n      realisedTotalLoss\\n      realisedPnl\\n      realisedAvgRoi\\n      realisedMaxRoi\\n      realisedMaxPnl\\n      realisedMaxDrawdown\\n      realisedMaxDrawdownPnl\\n      realisedProfitRate\\n      realisedGainLossRatio\\n      realisedProfitLossRatio\\n      totalGain\\n      pairs\\n      __typename\\n    }\\n    meta {\\n      total\\n      limit\\n      offset\\n      totalPages\\n      __typename\\n    }\\n    __typename\\n  }\\n}"}'
+  --data-raw $'{"operationName":"Search","variables":{"index":"copin.position_statistics_hyperliquid","body":{"filter":{"and":[{"field":"totalTrade","gte":"2"},{"field":"profitRate","gte":"60"},{"field":"pnl","gte":"100"},{"field":"winRate","gte":"51"},{"field":"runTimeDays","gte":"7"},{"field":"protocol","in":["HYPERLIQUID"]},{"field":"type","match":"D30"}]},"sorts":[{"field":"realisedPnl","direction":"desc"}],"paging":{"size":12,"from":0}}},"query":"query Search($index: String\u0021, $body: SearchPayload\u0021) {\\n  searchPositionStatistic(index: $index, body: $body) {\\n    data {\\n      id\\n      account\\n      protocol\\n      type\\n      maxDuration\\n      minDuration\\n      avgDuration\\n      realisedTotalGain\\n      totalLose\\n      totalLoss\\n      totalWin\\n      totalTrade\\n      totalLiquidation\\n      totalLiquidationAmount\\n      totalFee\\n      avgVolume\\n      totalVolume\\n      gainLossRatio\\n      orderPositionRatio\\n      profitLossRatio\\n      winRate\\n      longRate\\n      profitRate\\n      pnl\\n      unrealisedPnl\\n      avgRoi\\n      maxRoi\\n      maxPnl\\n      avgLeverage\\n      maxLeverage\\n      minLeverage\\n      runTimeDays\\n      indexTokens\\n      lastTradeAt\\n      lastTradeAtTs\\n      statisticAt\\n      createdAt\\n      updatedAt\\n      realisedTotalGain\\n      realisedTotalLoss\\n      realisedPnl\\n      realisedAvgRoi\\n      realisedMaxRoi\\n      realisedMaxPnl\\n      realisedMaxDrawdown\\n      realisedMaxDrawdownPnl\\n      realisedProfitRate\\n      realisedGainLossRatio\\n      realisedProfitLossRatio\\n      totalGain\\n      pairs\\n      __typename\\n    }\\n    meta {\\n      total\\n      limit\\n      offset\\n      totalPages\\n      __typename\\n    }\\n    __typename\\n  }\\n}"}'
 ```
 ## Response
 The response includes a data property containing the requested GraphQL data.
@@ -206,7 +206,7 @@ The response includes a data property containing the requested GraphQL data.
             Total fees paid across all trades
         </ResponseField>
         <ResponseField name="type" type="string">
-            Time period for this statistic (e.g., "D15", "D30")
+            Time period for this statistic (e.g., "D7", "D30")
         </ResponseField>
         <ResponseField name="statisticAt" type="string">
             Timestamp when these statistics were calculated
@@ -294,13 +294,13 @@ The response includes a data property containing the requested GraphQL data.
       "runTimeDays": 1,
       "lastTradeAtTs": 1744602207000,
       "totalFee": 6.371689466055969,
-      "type": "D15",
+      "type": "D30",
       "statisticAt": "2025-04-15T02:08:33.740Z",
       "lastTradeAt": "2025-04-14T03:43:27.000Z",
       "indexTokens": [
-        "GNS-191"
+        "BTC", "ETH"
       ],
-      "protocol": "GNS",
+      "protocol": "HYPERLIQUID",
       "createdAt": "2025-04-15T02:08:33.755Z",
       "isOpenPosition": false
     }
