@@ -1,0 +1,21 @@
+# Copin API
+
+> Comprehensive API for accessing perpetual trading data, trader statistics, positions, and copy trading across 50+ DeFi protocols.
+
+- Base URL: https://api.copin.io
+- App: https://app.copin.io
+- Docs: https://docs.copin.io
+
+## LLM-Friendly Documentation
+
+- [Overview](llms/overview.md)
+- [Authentication](llms/authentication.md)
+- [Trader Explorer](llms/trader-explorer.md)
+- [Hyperliquid Explorer](llms/hyperliquid-explorer.md)
+- [Trader Profile](llms/trader-profile.md)
+- [Open Interest](llms/open-interest.md)
+- [Live Trade](llms/live-trade.md)
+- [Trader Board](llms/trader-board.md)
+- [Copy Trades](llms/copy-trades.md)
+- [Wallets](llms/wallets.md)
+- [Mixins](llms/mixins.md)
